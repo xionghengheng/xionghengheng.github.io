@@ -6,7 +6,9 @@
       <title><![CDATA[2017年9月小结]]></title>
       <url>/2017/09/21/2017%E5%B9%B49%E6%9C%88%E5%B0%8F%E7%BB%93/</url>
       <content type="html"><![CDATA[<p>善于总结，勤于思考</p>
-<p>今天花了3个小时，搭建了一个基于hexo+github+markdown的blog平台，本意是希望和志同道合的技术好友一起学习，一起进步。</p>
+<p>每个月总结本月所得、所学</p>
+<p>今天花了3个小时，搭建了一个基于hexo+github+markdown的blog平台，本意是希望和志同道合的技术好友一起学习，一起进步。hexo安装过程中参考：<a href="http://www.jianshu.com/p/13e64c9e2295；markdown基本语法：http://www.jianshu.com/p/1e402922ee32/；搭建过程中遇到的问题：部署好的文章无法及时更新到github" target="_blank" rel="external">http://www.jianshu.com/p/13e64c9e2295；markdown基本语法：http://www.jianshu.com/p/1e402922ee32/；搭建过程中遇到的问题：部署好的文章无法及时更新到github</a> page，参考到了<a href="https://github.com/hexojs/hexo/issues/961，是因为同步到旧文件造成，所以先清空public下的文件，然后再部署即可，解决方案：" target="_blank" rel="external">https://github.com/hexojs/hexo/issues/961，是因为同步到旧文件造成，所以先清空public下的文件，然后再部署即可，解决方案：</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo clean；</div><div class="line">hexo deploy;</div></pre></td></tr></table></figure>
 ]]></content>
       
         
