@@ -3,6 +3,15 @@
   
     
     <entry>
+      <title><![CDATA[test]]></title>
+      <url>/2018/02/20/test/</url>
+      <content type="html"><![CDATA[<p><img src="test/introduce.jpg" alt="introduce"></p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[配置python-protobuf解析环境]]></title>
       <url>/2018/01/27/%E9%85%8D%E7%BD%AEpython-protobuf%E8%A7%A3%E6%9E%90%E7%8E%AF%E5%A2%83/</url>
       <content type="html"><![CDATA[<p>protobuf是一种跨语言协议，不同语言之间只需定义同一份proto文件，即可实现不同种类的语言的协议沟通。由于工作中使用c++解码较为麻烦，为了提升工作效率，想通过python达到快速解析pb数据的目的（系统为macOS Sierra）。</p>
