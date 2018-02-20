@@ -3,7 +3,7 @@
   
     
     <entry>
-      <title><![CDATA[IOS常见语法解惑]]></title>
+      <title><![CDATA[配置python-protobuf解析环境]]></title>
       <url>/2018/01/27/%E9%85%8D%E7%BD%AEpython-protobuf%E8%A7%A3%E6%9E%90%E7%8E%AF%E5%A2%83/</url>
       <content type="html"><![CDATA[<p>为了提升工作效率，想通过python达到快速解析pb数据的目的（系统为macOS Sierra）。</p>
 <h3 id="python版本的protobuf安装"><a href="#python版本的protobuf安装" class="headerlink" title="python版本的protobuf安装"></a>python版本的protobuf安装</h3><p>首先安装官方protobuf，该命令可以将proto源文件编译成对应语音的数据结构文件和解析代码，如python对应的文件后缀名通常为.py和.pyc；安装官方protobuf，<a href="https://github.com/google/protobuf/releases，下载全量源码，然后解压、安装，然后确认安装是否成功" target="_blank" rel="external">https://github.com/google/protobuf/releases，下载全量源码，然后解压、安装，然后确认安装是否成功</a></p>
