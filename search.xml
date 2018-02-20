@@ -4,8 +4,13 @@
     
     <entry>
       <title></title>
-      <url>/2018/01/25/test/</url>
-      <content type="html"><![CDATA[<p>test</p>
+      <url>/2017/09/25/%E5%BC%80%E7%AB%AF/</url>
+      <content type="html"><![CDATA[<p>善于总结，勤于思考，每个月总结本月所得、所学。今天花了3个小时，搭建了一个基于hexo+github+markdown的blog平台，本意是希望和志同道合的技术好友一起学习，一起进步。</p>
+<h3 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h3><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>blog搭建流程：(<a href="http://www.jianshu.com/p/13e64c9e2295)；" target="_blank" rel="external">http://www.jianshu.com/p/13e64c9e2295)；</a></p>
+<p>主题模板：(<a href="https://github.com/yuche/hexo-theme-kael)；" target="_blank" rel="external">https://github.com/yuche/hexo-theme-kael)；</a></p>
+<p>markdown基本语法：(<a href="http://www.jianshu.com/p/1e402922ee32/)；" target="_blank" rel="external">http://www.jianshu.com/p/1e402922ee32/)；</a></p>
+<p>遇到的问题：(<a href="https://github.com/hexojs/hexo/issues/961" target="_blank" rel="external">https://github.com/hexojs/hexo/issues/961</a>);</p>
+<p>部署好的文章无法及时更新到github page，原因是因为同步到旧文件造成，所以先清空public下的文件，然后再部署即可（hexo clean；hexo g;hexo deploy;）。ps ：目前依然存在该问题，不知道是不是github page服务存在问题。</p>
 ]]></content>
       
         
@@ -24,28 +29,6 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@implementation BatteryInfo</div><div class="line"></div><div class="line">- (void)showBatteryInfo</div><div class="line">&#123;</div><div class="line">//TODO</div><div class="line">&#125;</div><div class="line">@synthesize batteryLevel = _batteryLevel;</div><div class="line">@synthesize current = _current;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
 ]]></content>
       
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[2017年9月小结]]></title>
-      <url>/2017/09/21/2017%E5%B9%B49%E6%9C%88%E5%B0%8F%E7%BB%93/</url>
-      <content type="html"><![CDATA[<p>善于总结，勤于思考，每个月总结本月所得、所学。今天花了3个小时，搭建了一个基于hexo+github+markdown的blog平台，本意是希望和志同道合的技术好友一起学习，一起进步。</p>
-<p>###起步</p>
-<p>###参考</p>
-<p>blog搭建流程：(<a href="http://www.jianshu.com/p/13e64c9e2295)；" target="_blank" rel="external">http://www.jianshu.com/p/13e64c9e2295)；</a></p>
-<p>主题模板：(<a href="https://github.com/yuche/hexo-theme-kael)；" target="_blank" rel="external">https://github.com/yuche/hexo-theme-kael)；</a></p>
-<p>markdown基本语法：(<a href="http://www.jianshu.com/p/1e402922ee32/)；" target="_blank" rel="external">http://www.jianshu.com/p/1e402922ee32/)；</a></p>
-<p>遇到的问题：(<a href="https://github.com/hexojs/hexo/issues/961" target="_blank" rel="external">https://github.com/hexojs/hexo/issues/961</a>);</p>
-<p>部署好的文章无法及时更新到github page，原因是因为同步到旧文件造成，所以先清空public下的文件，然后再部署即可（hexo clean；hexo g;hexo deploy;）。ps ：目前依然存在该问题，不知道是不是github page服务存在问题。</p>
-]]></content>
-      
-        
-        <tags>
-            
-            <tag> 总结 </tag>
-            
-        </tags>
         
     </entry>
     
