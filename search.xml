@@ -4,6 +4,29 @@
     
     <entry>
       <title><![CDATA[IOS常见语法解惑]]></title>
+      <url>/2018/01/27/%E9%85%8D%E7%BD%AEpython-protobuf%E8%A7%A3%E6%9E%90%E7%8E%AF%E5%A2%83/</url>
+      <content type="html"><![CDATA[<p>为了提升工作效率，想通过python达到快速解析pb数据的目的（系统为macOS Sierra）。</p>
+<h3 id="python版本的protobuf安装"><a href="#python版本的protobuf安装" class="headerlink" title="python版本的protobuf安装"></a>python版本的protobuf安装</h3><p>首先安装官方protobuf，该命令可以将proto源文件编译成对应语音的数据结构文件和解析代码，如python对应的文件后缀名通常为.py和.pyc；安装官方protobuf，<a href="https://github.com/google/protobuf/releases，下载全量源码，然后解压、安装，然后确认安装是否成功" target="_blank" rel="external">https://github.com/google/protobuf/releases，下载全量源码，然后解压、安装，然后确认安装是否成功</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cd 对应目录</div><div class="line">./configure </div><div class="line">make </div><div class="line">make check </div><div class="line">make install</div><div class="line">protoc --version</div></pre></td></tr></table></figure>
+<p>其次，安装对应的python protobuf模块，python引入该模块即可编写代码，实现pb文件的解析。安装python protobuf模块，首先安装pip，mac系统的python自带easy_install，因此直接输入命令：sudo easy_install pip；再通过pip来安装protobuf，输入命令：pip install protobuf；</p>
+<p>遇到的问题：mac下python的six模块版本较低，且由于系统原因，无法被卸载安装新版，而pip在安装protobuf时需要，默认会下载安装较新版本的six模块，因此这里出现了冲突。通过参考该链接，<a href="https://github.com/pypa/pip/issues/3165，只需在使用pip安装python模块前，执行该命令即可：" target="_blank" rel="external">https://github.com/pypa/pip/issues/3165，只需在使用pip安装python模块前，执行该命令即可：</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install --ignore-installed six</div></pre></td></tr></table></figure>
+<p>###使用python解析pb数据流程</p>
+<p>切换到对应的proto源文件目录，执行以下命令，将产出两个文件hello_world.py 和hello_world.pyc</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">protoc -I . --python_out=. hello_world.proto</div></pre></td></tr></table></figure>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 环境配置 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[IOS常见语法解惑]]></title>
       <url>/2017/09/25/IOS%E5%B8%B8%E8%A7%81%E8%AF%AD%E6%B3%95%E8%A7%A3%E6%83%91/</url>
       <content type="html"><![CDATA[<p>由于工作工程中经常需要查看IOS的Objective-C代码，遂把一些常见的、有疑问的OC语法列出，方便之后会看，提升效率。</p>
 <h3 id="Objective-C中的-语法"><a href="#Objective-C中的-语法" class="headerlink" title="Objective-C中的@语法"></a>Objective-C中的@语法</h3><p>@interface告诉编译器，我要声明一个新类，包含了类的属性和方法，以@end结尾；</p>
@@ -15,6 +38,26 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@implementation BatteryInfo</div><div class="line"></div><div class="line">- (void)showBatteryInfo</div><div class="line">&#123;</div><div class="line">//TODO</div><div class="line">&#125;</div><div class="line">@synthesize batteryLevel = _batteryLevel;</div><div class="line">@synthesize current = _current;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
 ]]></content>
       
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[开端]]></title>
+      <url>/2017/09/24/%E5%BC%80%E7%AB%AF/</url>
+      <content type="html"><![CDATA[<p>善于总结，勤于思考，每个月总结本月所得、所学。今天花了3个小时，搭建了一个基于hexo+github+markdown的blog平台，本意是希望和志同道合的技术好友一起学习，一起进步。</p>
+<h3 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h3><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>blog搭建流程：(<a href="http://www.jianshu.com/p/13e64c9e2295)；" target="_blank" rel="external">http://www.jianshu.com/p/13e64c9e2295)；</a></p>
+<p>主题模板：(<a href="https://github.com/yuche/hexo-theme-kael)；" target="_blank" rel="external">https://github.com/yuche/hexo-theme-kael)；</a></p>
+<p>markdown基本语法：(<a href="http://www.jianshu.com/p/1e402922ee32/)；" target="_blank" rel="external">http://www.jianshu.com/p/1e402922ee32/)；</a></p>
+<p>遇到的问题：(<a href="https://github.com/hexojs/hexo/issues/961" target="_blank" rel="external">https://github.com/hexojs/hexo/issues/961</a>);</p>
+<p>部署好的文章无法及时更新到github page，原因是因为同步到旧文件造成，所以先清空public下的文件，然后再部署即可（hexo clean；hexo g;hexo deploy;）。ps ：目前依然存在该问题，不知道是不是github page服务存在问题。</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 环境配置 </tag>
+            
+        </tags>
         
     </entry>
     
