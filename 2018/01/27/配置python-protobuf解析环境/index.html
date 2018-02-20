@@ -81,18 +81,20 @@
 
 
 
-<meta name="description" content="为了提升工作效率，想通过python达到快速解析pb数据的目的（系统为macOS Sierra）。 python版本的protobuf安装首先安装官方protobuf，该命令可以将proto源文件编译成对应语音的数据结构文件和解析代码，如python对应的文件后缀名通常为.py和.pyc；安装官方protobuf，https://github.com/google/protobuf/release">
+<meta name="description" content="protobuf是一种跨语言协议，不同语言之间只需定义同一份proto文件，即可实现不同种类的语言的协议沟通。由于工作中使用c++解码较为麻烦，为了提升工作效率，想通过python达到快速解析pb数据的目的（系统为macOS Sierra）。  出自文章（https://segmentfault.com/a/1190000010098194） python版本的protobuf安装首先安装官方pr">
 <meta name="keywords" content="环境配置">
 <meta property="og:type" content="article">
 <meta property="og:title" content="配置python-protobuf解析环境">
 <meta property="og:url" content="http://xionghengheng.github.io/2018/01/27/配置python-protobuf解析环境/index.html">
 <meta property="og:site_name" content="Doer">
-<meta property="og:description" content="为了提升工作效率，想通过python达到快速解析pb数据的目的（系统为macOS Sierra）。 python版本的protobuf安装首先安装官方protobuf，该命令可以将proto源文件编译成对应语音的数据结构文件和解析代码，如python对应的文件后缀名通常为.py和.pyc；安装官方protobuf，https://github.com/google/protobuf/release">
+<meta property="og:description" content="protobuf是一种跨语言协议，不同语言之间只需定义同一份proto文件，即可实现不同种类的语言的协议沟通。由于工作中使用c++解码较为麻烦，为了提升工作效率，想通过python达到快速解析pb数据的目的（系统为macOS Sierra）。  出自文章（https://segmentfault.com/a/1190000010098194） python版本的protobuf安装首先安装官方pr">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-20T06:42:23.000Z">
+<meta property="og:image" content="http://xionghengheng.github.io/Users/wuzengxiong/Desktop/ebb2c4923e90eec472d7d7fd2.png">
+<meta property="og:updated_time" content="2018-02-20T10:11:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="配置python-protobuf解析环境">
-<meta name="twitter:description" content="为了提升工作效率，想通过python达到快速解析pb数据的目的（系统为macOS Sierra）。 python版本的protobuf安装首先安装官方protobuf，该命令可以将proto源文件编译成对应语音的数据结构文件和解析代码，如python对应的文件后缀名通常为.py和.pyc；安装官方protobuf，https://github.com/google/protobuf/release">
+<meta name="twitter:description" content="protobuf是一种跨语言协议，不同语言之间只需定义同一份proto文件，即可实现不同种类的语言的协议沟通。由于工作中使用c++解码较为麻烦，为了提升工作效率，想通过python达到快速解析pb数据的目的（系统为macOS Sierra）。  出自文章（https://segmentfault.com/a/1190000010098194） python版本的protobuf安装首先安装官方pr">
+<meta name="twitter:image" content="http://xionghengheng.github.io/Users/wuzengxiong/Desktop/ebb2c4923e90eec472d7d7fd2.png">
 
 
 
@@ -358,13 +360,16 @@
       
 
       
-        <p>为了提升工作效率，想通过python达到快速解析pb数据的目的（系统为macOS Sierra）。</p>
-<h3 id="python版本的protobuf安装"><a href="#python版本的protobuf安装" class="headerlink" title="python版本的protobuf安装"></a>python版本的protobuf安装</h3><p>首先安装官方protobuf，该命令可以将proto源文件编译成对应语音的数据结构文件和解析代码，如python对应的文件后缀名通常为.py和.pyc；安装官方protobuf，<a href="https://github.com/google/protobuf/releases，下载全量源码，然后解压、安装，然后确认安装是否成功" target="_blank" rel="external">https://github.com/google/protobuf/releases，下载全量源码，然后解压、安装，然后确认安装是否成功</a></p>
+        <p>protobuf是一种跨语言协议，不同语言之间只需定义同一份proto文件，即可实现不同种类的语言的协议沟通。由于工作中使用c++解码较为麻烦，为了提升工作效率，想通过python达到快速解析pb数据的目的（系统为macOS Sierra）。</p>
+<p><img src="/Users/wuzengxiong/Desktop/ebb2c4923e90eec472d7d7fd2.png" alt="ebb2c4923e90eec472d7d7fd2"></p>
+<p>出自文章（<a href="https://segmentfault.com/a/1190000010098194）" target="_blank" rel="external">https://segmentfault.com/a/1190000010098194）</a></p>
+<h3 id="python版本的protobuf安装"><a href="#python版本的protobuf安装" class="headerlink" title="python版本的protobuf安装"></a>python版本的protobuf安装</h3><p>首先安装官方protobuf，通过执行protoc命令，可以将proto源文件编译成对应语言的数据结构文件和解析代码，如python对应的文件后缀名通常为.py和.pyc；安装官方，<a href="https://github.com/google/protobuf/releases，下载全量源码，然后解压、安装，然后确认安装是否成功" target="_blank" rel="external">https://github.com/google/protobuf/releases，下载全量源码，然后解压、安装，然后确认安装是否成功</a></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cd 对应目录</div><div class="line">./configure </div><div class="line">make </div><div class="line">make check </div><div class="line">make install</div><div class="line">protoc --version</div></pre></td></tr></table></figure>
 <p>其次，安装对应的python protobuf模块，python引入该模块即可编写代码，实现pb文件的解析。安装python protobuf模块，首先安装pip，mac系统的python自带easy_install，因此直接输入命令：sudo easy_install pip；再通过pip来安装protobuf，输入命令：pip install protobuf；</p>
 <p>遇到的问题：mac下python的six模块版本较低，且由于系统原因，无法被卸载安装新版，而pip在安装protobuf时需要，默认会下载安装较新版本的six模块，因此这里出现了冲突。通过参考该链接，<a href="https://github.com/pypa/pip/issues/3165，只需在使用pip安装python模块前，执行该命令即可：" target="_blank" rel="external">https://github.com/pypa/pip/issues/3165，只需在使用pip安装python模块前，执行该命令即可：</a></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install --ignore-installed six</div></pre></td></tr></table></figure>
 <p>###使用python解析pb数据流程</p>
+<p>这里使用c++对数据进行编码，并生成pb二进制文件，再通过python对pb二进制文件解码，得到c++输入的数据。</p>
 <p>切换到对应的proto源文件目录，执行以下命令，将产出两个文件hello_world.py 和hello_world.pyc</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">protoc -I . --python_out=. hello_world.proto</div></pre></td></tr></table></figure>
 
@@ -536,7 +541,7 @@
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="http://weibo.com/Z3r0yu" target="_blank" title="Weibo">
+                    <a href="undefined" target="_blank" title="Weibo">
                       
                         <i class="fa fa-fw fa-globe"></i>Weibo</a>
                   </span>
@@ -563,7 +568,7 @@
               <ul class="links-of-blogroll-list">
                 
                   <li class="links-of-blogroll-item">
-                    <a href="site" title="我的CSDN博客" target="_blank">我的CSDN博客</a>
+                    <a href="http://blog.csdn.net/q328965539" title="我的CSDN博客" target="_blank">我的CSDN博客</a>
                   </li>
                 
               </ul>
