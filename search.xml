@@ -5,7 +5,7 @@
     <entry>
       <title><![CDATA[test]]></title>
       <url>/2018/02/20/test/</url>
-      <content type="html"><![CDATA[<p><img src="test/introduce.jpg" alt="introduce"></p>
+      <content type="html"><![CDATA[<p><img src="./test/introduce.jpg" alt="introduce"></p>
 ]]></content>
       
         
