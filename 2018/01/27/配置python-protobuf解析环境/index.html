@@ -89,12 +89,12 @@
 <meta property="og:site_name" content="Doer">
 <meta property="og:description" content="protobuf是一种跨语言协议，不同语言之间只需定义同一份proto文件，即可实现不同种类的语言的协议沟通。由于工作中使用c++解码较为麻烦，为了提升工作效率，想通过python达到快速解析pb数据的目的（系统为macOS Sierra）。  出自文章（https://segmentfault.com/a/1190000010098194） python版本的protobuf安装首先安装官方pr">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://xionghengheng.github.io/2018/01/27/配置python-protobuf解析环境/配置python-protobuf解析环境/introduce.jpg">
-<meta property="og:updated_time" content="2018-02-20T10:55:19.000Z">
+<meta property="og:image" content="http://xionghengheng.github.io/2018/01/27/配置python-protobuf解析环境/introduce.jpg">
+<meta property="og:updated_time" content="2018-02-20T11:15:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="配置python-protobuf解析环境">
 <meta name="twitter:description" content="protobuf是一种跨语言协议，不同语言之间只需定义同一份proto文件，即可实现不同种类的语言的协议沟通。由于工作中使用c++解码较为麻烦，为了提升工作效率，想通过python达到快速解析pb数据的目的（系统为macOS Sierra）。  出自文章（https://segmentfault.com/a/1190000010098194） python版本的protobuf安装首先安装官方pr">
-<meta name="twitter:image" content="http://xionghengheng.github.io/2018/01/27/配置python-protobuf解析环境/配置python-protobuf解析环境/introduce.jpg">
+<meta name="twitter:image" content="http://xionghengheng.github.io/2018/01/27/配置python-protobuf解析环境/introduce.jpg">
 
 
 
@@ -361,9 +361,9 @@
 
       
         <p>protobuf是一种跨语言协议，不同语言之间只需定义同一份proto文件，即可实现不同种类的语言的协议沟通。由于工作中使用c++解码较为麻烦，为了提升工作效率，想通过python达到快速解析pb数据的目的（系统为macOS Sierra）。</p>
-<p><img src="配置python-protobuf解析环境/introduce.jpg" alt="introduce"></p>
+<p><img src="introduce.jpg" alt="introduce"></p>
 <p>出自文章（<a href="https://segmentfault.com/a/1190000010098194）" target="_blank" rel="external">https://segmentfault.com/a/1190000010098194）</a></p>
-<h3 id="python版本的protobuf安装"><a href="#python版本的protobuf安装" class="headerlink" title="python版本的protobuf安装"></a>python版本的protobuf安装</h3><p>首先安装官方protobuf，通过执行protoc命令，可以将proto源文件编译成对应语言的数据结构文件和解析代码，如python对应的文件后缀名通常为.py和.pyc；安装官方，<a href="https://github.com/google/protobuf/releases，下载全量源码，然后解压、安装，然后确认安装是否成功" target="_blank" rel="external">https://github.com/google/protobuf/releases，下载全量源码，然后解压、安装，然后确认安装是否成功</a></p>
+<h3 id="python版本的protobuf安装"><a href="#python版本的protobuf安装" class="headerlink" title="python版本的protobuf安装"></a>python版本的protobuf安装</h3><p>首先安装官方protobuf，通过执行protoc命令，可以将proto源文件编译成对应语言的数据结构文件和解析代码，如python对应的文件后缀名通常为.py和.pyc；安装官方，<a href="https://github.com/google/protobuf/releases，下载全量源码，然后解压、安装，然后确认安装是否成功。（此外可以通过" target="_blank" rel="external">https://github.com/google/protobuf/releases，下载全量源码，然后解压、安装，然后确认安装是否成功。（此外可以通过</a> brew install protobuf 直接安装）</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cd 对应目录</div><div class="line">./configure </div><div class="line">make </div><div class="line">make check </div><div class="line">make install</div><div class="line">protoc --version</div></pre></td></tr></table></figure>
 <p>其次，安装对应的python protobuf模块，python引入该模块即可编写代码，实现pb文件的解析。安装python protobuf模块，首先安装pip，mac系统的python自带easy_install，因此直接输入命令：sudo easy_install pip；再通过pip来安装protobuf，输入命令：pip install protobuf；</p>
 <p>遇到的问题：mac下python的six模块版本较低，且由于系统原因，无法被卸载安装新版，而pip在安装protobuf时需要，默认会下载安装较新版本的six模块，因此这里出现了冲突。通过参考该链接，<a href="https://github.com/pypa/pip/issues/3165，只需在使用pip安装python模块前，执行该命令即可：" target="_blank" rel="external">https://github.com/pypa/pip/issues/3165，只需在使用pip安装python模块前，执行该命令即可：</a></p>
@@ -411,10 +411,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/20/test/" rel="prev" title="test">
-                test <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -505,7 +501,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
