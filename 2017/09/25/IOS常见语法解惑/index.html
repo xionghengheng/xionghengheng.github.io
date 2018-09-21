@@ -81,17 +81,17 @@
 
 
 
-<meta name="description" content="由于工作工程中经常需要查看IOS的Objective-C代码，遂把一些常见的、有疑问的OC语法列出，方便之后会看，提升效率。 Objective-C中的@语法@interface告诉编译器，我要声明一个新类，包含了类的属性和方法，以@end结尾； @implementation告诉编译器，这是某个类的具体实现，以@end结尾； @property是声明属性的语法，它可以快速方便的为类的成员变量创建">
+<meta name="description" content="由于工作过程中经常需要查看IOS的Objective-C代码，遂把一些常见的、有疑问的OC语法列出，方便之后会看，提升效率。 Objective-C中的@语法@interface告诉编译器，我要声明一个新类，包含了类的属性和方法，以@end结尾； @implementation告诉编译器，这是某个类的具体实现，以@end结尾； @property是声明属性的语法，它可以快速方便的为类的成员变量创建">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IOS常见语法解惑">
 <meta property="og:url" content="http://xionghengheng.github.io/2017/09/25/IOS常见语法解惑/index.html">
 <meta property="og:site_name" content="Doer">
-<meta property="og:description" content="由于工作工程中经常需要查看IOS的Objective-C代码，遂把一些常见的、有疑问的OC语法列出，方便之后会看，提升效率。 Objective-C中的@语法@interface告诉编译器，我要声明一个新类，包含了类的属性和方法，以@end结尾； @implementation告诉编译器，这是某个类的具体实现，以@end结尾； @property是声明属性的语法，它可以快速方便的为类的成员变量创建">
+<meta property="og:description" content="由于工作过程中经常需要查看IOS的Objective-C代码，遂把一些常见的、有疑问的OC语法列出，方便之后会看，提升效率。 Objective-C中的@语法@interface告诉编译器，我要声明一个新类，包含了类的属性和方法，以@end结尾； @implementation告诉编译器，这是某个类的具体实现，以@end结尾； @property是声明属性的语法，它可以快速方便的为类的成员变量创建">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-25T07:16:03.000Z">
+<meta property="og:updated_time" content="2018-08-18T15:21:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IOS常见语法解惑">
-<meta name="twitter:description" content="由于工作工程中经常需要查看IOS的Objective-C代码，遂把一些常见的、有疑问的OC语法列出，方便之后会看，提升效率。 Objective-C中的@语法@interface告诉编译器，我要声明一个新类，包含了类的属性和方法，以@end结尾； @implementation告诉编译器，这是某个类的具体实现，以@end结尾； @property是声明属性的语法，它可以快速方便的为类的成员变量创建">
+<meta name="twitter:description" content="由于工作过程中经常需要查看IOS的Objective-C代码，遂把一些常见的、有疑问的OC语法列出，方便之后会看，提升效率。 Objective-C中的@语法@interface告诉编译器，我要声明一个新类，包含了类的属性和方法，以@end结尾； @implementation告诉编译器，这是某个类的具体实现，以@end结尾； @property是声明属性的语法，它可以快速方便的为类的成员变量创建">
 
 
 
@@ -357,7 +357,7 @@
       
 
       
-        <p>由于工作工程中经常需要查看IOS的Objective-C代码，遂把一些常见的、有疑问的OC语法列出，方便之后会看，提升效率。</p>
+        <p>由于工作过程中经常需要查看IOS的Objective-C代码，遂把一些常见的、有疑问的OC语法列出，方便之后会看，提升效率。</p>
 <h3 id="Objective-C中的-语法"><a href="#Objective-C中的-语法" class="headerlink" title="Objective-C中的@语法"></a>Objective-C中的@语法</h3><p>@interface告诉编译器，我要声明一个新类，包含了类的属性和方法，以@end结尾；</p>
 <p>@implementation告诉编译器，这是某个类的具体实现，以@end结尾；</p>
 <p>@property是声明属性的语法，它可以快速方便的为类的成员变量创建存取器，并允许我们通过点语法使用存取器，<strong>@property等同于在.h文件中声明实例变量的get/set方法，@synthesize等同于在.m文件中实现实例变量的get/set方法</strong>。需要注意的是@property可以直接给成员变量赋特性，如nonatomic表示非原子的，assign表示值类型。</p>
@@ -365,7 +365,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@interface BatteryInfo: NSObject</div><div class="line">&#123;</div><div class="line">NSInteger _batteryLevel;</div><div class="line">CGFloat   _current;</div><div class="line">&#125;</div><div class="line">- (void)showBatteryInfo;</div><div class="line">@property (nonatomic, assign) NSInteger batteryLevel;</div><div class="line">@property (nonatomic, assign) CGFloat current;</div><div class="line">@end</div></pre></td></tr></table></figure>
 <p>实现通常放在类的.m文件中，代码示例如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@implementation BatteryInfo</div><div class="line"></div><div class="line">- (void)showBatteryInfo</div><div class="line">&#123;</div><div class="line">//TODO</div><div class="line">&#125;</div><div class="line">@synthesize batteryLevel = _batteryLevel;</div><div class="line">@synthesize current = _current;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
-
+<h3 id="Objective-C中的函数调用语法"><a href="#Objective-C中的函数调用语法" class="headerlink" title="Objective-C中的函数调用语法"></a>Objective-C中的函数调用语法</h3>
       
     </div>
     
@@ -492,7 +492,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -581,7 +581,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Objective-C中的-语法"><span class="nav-number">1.</span> <span class="nav-text">Objective-C中的@语法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Objective-C中的-语法"><span class="nav-number">1.</span> <span class="nav-text">Objective-C中的@语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Objective-C中的函数调用语法"><span class="nav-number">2.</span> <span class="nav-text">Objective-C中的函数调用语法</span></a></li></ol></div>
             
 
           </div>

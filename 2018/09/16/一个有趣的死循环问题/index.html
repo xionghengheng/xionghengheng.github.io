@@ -81,16 +81,17 @@
 
 
 
-<meta name="description" content="一只HACKER">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Doer">
-<meta property="og:url" content="http://xionghengheng.github.io/index.html">
+<meta name="description" content="##问题引出 最近在工作过程中，遇到一个很有意思的bug，问题出现概率很小，很难复现，但是特别严重，直接导致用户无法使用App，属于不可容忍的问题，因此必须解决。问题出现在Android-App跑压测的过程中，我们提供的第三方库会突然停止工作，但是App的UI还是能正常的运转，于是我以我的职业敏感性当即做出判断（害羞 &amp;lt;逃），导致这个bug是因为我们提供的动态库中的消息线程被堵塞了，从而导致">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个有趣的死循环问题">
+<meta property="og:url" content="http://xionghengheng.github.io/2018/09/16/一个有趣的死循环问题/index.html">
 <meta property="og:site_name" content="Doer">
-<meta property="og:description" content="一只HACKER">
+<meta property="og:description" content="##问题引出 最近在工作过程中，遇到一个很有意思的bug，问题出现概率很小，很难复现，但是特别严重，直接导致用户无法使用App，属于不可容忍的问题，因此必须解决。问题出现在Android-App跑压测的过程中，我们提供的第三方库会突然停止工作，但是App的UI还是能正常的运转，于是我以我的职业敏感性当即做出判断（害羞 &amp;lt;逃），导致这个bug是因为我们提供的动态库中的消息线程被堵塞了，从而导致">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-21T01:46:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Doer">
-<meta name="twitter:description" content="一只HACKER">
+<meta name="twitter:title" content="一个有趣的死循环问题">
+<meta name="twitter:description" content="##问题引出 最近在工作过程中，遇到一个很有意思的bug，问题出现概率很小，很难复现，但是特别严重，直接导致用户无法使用App，属于不可容忍的问题，因此必须解决。问题出现在Android-App跑压测的过程中，我们提供的第三方库会突然停止工作，但是App的UI还是能正常的运转，于是我以我的职业敏感性当即做出判断（害羞 &amp;lt;逃），导致这个bug是因为我们提供的动态库中的消息线程被堵塞了，从而导致">
 
 
 
@@ -120,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://xionghengheng.github.io/"/>
+  <link rel="canonical" href="http://xionghengheng.github.io/2018/09/16/一个有趣的死循环问题/"/>
 
 
 
 
 
-  <title>Doer</title>
+  <title>一个有趣的死循环问题 | Doer</title>
   
 
 
@@ -155,8 +156,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -259,9 +259,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -291,9 +291,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/16/一个有趣的死循环问题/" itemprop="url">一个有趣的死循环问题</a></h1>
+          <h1 class="post-title" itemprop="name headline">一个有趣的死循环问题</h1>
         
 
         <div class="post-meta">
@@ -336,143 +334,10 @@
           
 
           
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          ##问题引出
-最近在工作过程中，遇到一个很有意思的bug，问题出现概率很小，很难复现，但是特别严重，直接导致用户无法使用App，属于不可容忍的问题，因此必须解决。问题出现在Android-App跑压测的过程中，我们提供的第三方库会突然停止工作，但是App的UI还是能正常的运转，于是我以我的职业敏感性
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/16/一个有趣的死循环问题/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xionghengheng.github.io/2018/01/27/配置python-protobuf解析环境/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Doer">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Doer">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/27/配置python-protobuf解析环境/" itemprop="url">配置python-protobuf解析环境</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-27T00:15:53+08:00">
-                2018-01-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/01/27/配置python-protobuf解析环境/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/01/27/配置python-protobuf解析环境/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
           
 
           
@@ -492,20 +357,35 @@
       
 
       
-        
-          
-          protobuf是一种跨语言协议，不同语言之间只需定义同一份proto文件，即可实现不同种类的语言的协议沟通。由于工作中使用c++解码较为麻烦，为了提升工作效率，想通过python达到快速解析pb数据的目的（系统为macOS Sierra）。
+        <p>##问题引出</p>
+<p>最近在工作过程中，遇到一个很有意思的bug，问题出现概率很小，很难复现，但是特别严重，直接导致用户无法使用App，属于不可容忍的问题，因此必须解决。问题出现在Android-App跑压测的过程中，我们提供的第三方库会突然停止工作，但是App的UI还是能正常的运转，于是我以我的职业敏感性当即做出判断（害羞 &lt;逃），导致这个bug是因为我们提供的动态库中的消息线程被堵塞了，从而导致整个库无法工作。</p>
+<p>通常情况下，线程被堵塞住，有下面几个原因：</p>
+<ul>
+<li>执行耗时任务（如网络IO或者文件IO等，导致整个线程卡死）</li>
+<li>死锁（消息线程拿着A锁，等待B锁，数据处理线程拿着B锁，等待A锁，相互等待，导致卡死）</li>
+<li>死循环（程序卡在一个循环，CPU狂转，无法跳出）</li>
+</ul>
+<h2 id="问题定位"><a href="#问题定位" class="headerlink" title="问题定位"></a>问题定位</h2><p>首先第一个思路，就是在App出现卡主问题后，导出所有线程的调用堆栈，查看我们自己的库线程，看哪个线程哪个函数调用存在问题，取线程堆栈，通常有两个方法：</p>
+<ul>
+<li><p>在Android端，程序ANR后，系统会保留该进程的所有线程堆栈的traces文件。但是有个前提，只有主线程（UI线程）卡主的时候，系统才会生成这个文件，其他子线程或者库线程卡主是不会生成traces文件的。</p>
+</li>
+<li><p>出现问题后，让App强制crash，生成crash线程堆栈。我们尝试让UI线程强制crash后，却只生成了UI线程的调用栈，没有我们库线程的信息。</p>
+</li>
+</ul>
+<p>抓调用栈的思路否定之后，我们决定先进一步缩小问题范围，出现卡主问题后，我们对Android手机执行了如下命令，找出我们App所有线程的运行状况。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell top -m 20 -t</div></pre></td></tr></table></figure>
+<p>巧合地发现每次采样数据中，CPU使用率最高都是我们App进程中的同一个线程，正是我们动态库的消息线程，而该线程的使用率竟然比图像绘制线程占比还要高了几倍，很明显的异常，因此几乎可以断定是该线程导致的卡死问题，同时也可以排除死锁的可能性，因为死锁会让线程wait住，不会过多的占用CPU，同时由于我们的AppIO操作很少，也就排除了文件IO和网络IO，基本可以确认是死循环导致。</p>
+<p>那么这个线程到底是在哪个位置卡死呢？这时候最笨的方法，效果最明显，【二分加Log法】，加log的位置以代码行数进行二分切隔，如果第N行日志没有输出，那么肯定说明问题代码在第N-1~N行之间，于是乎最终定位到了这一段神奇的死循环代码问题。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">TransAngleTo360</span><span class="params">(<span class="keyword">double</span>&amp; dAngle)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">	<span class="keyword">while</span> (dAngle &lt; <span class="number">0</span>)</div><div class="line">	&#123;</div><div class="line">		dAngle += <span class="number">360</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">while</span> (dAngle &gt; <span class="number">360</span>)</div><div class="line">	&#123;</div><div class="line">		dAngle -= <span class="number">360</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这段代码，通过两个while循环将输入角度归化到0~360度之间，问题就出在这个输入值这里。通过复现的日志发现，代码走到了异常分支，对某个静态数组 double arrAngele[8]，执行了取下标-1的操作，arrAngele[-1]，产生了一个未定义的极大值，我们都知道8字节的double的取值范围是：</p>
+<blockquote>
+<p>负值取值范围为 -1.79769313486231570E+308 到 -4.94065645841246544E-324；<br>正值取值范围为 4.94065645841246544E-324 到 1.79769313486231570E+308。</p>
+</blockquote>
+<p>如果将1.79e+308这个数传给TransAngleTo360函数，那么函数需要执行5e+305次循环才能结束，假设我们的计算机每秒能执行10亿次机器指令，那执行完这个循环的时间，大约是1e+207秒。。。。</p>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>对于函数输入参数，进行超大或超小值的范围控制，很明显这个方法只是暂时的补丁，且是在你知道入参大小的前提下，做的限制，如果不确定入参范围，很可能会出问题。</p>
+<p>那么更好的做法其实是这样的，先看整数部分有多少个360，记为cnt，然后用原有角度减去cnt*360即可，为负数的时候对应处理下就行。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">TransAngleTo360</span><span class="params">(<span class="keyword">double</span>&amp; dAngle)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">int</span> cnt = dAngle/<span class="number">360</span>;</div><div class="line">    <span class="keyword">if</span> (time &gt;= <span class="number">0</span>)</div><div class="line">        dAngle = dAngle - cnt*<span class="number">360</span>;</div><div class="line">    <span class="keyword">else</span></div><div class="line">        dAngle = dAngle - (cnt - <span class="number">1</span>)*<span class="number">360</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
-出自文章（https://segmentfault.c
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/27/配置python-protobuf解析环境/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
       
     </div>
     
@@ -522,151 +402,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xionghengheng.github.io/2017/09/25/IOS常见语法解惑/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Doer">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Doer">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/25/IOS常见语法解惑/" itemprop="url">IOS常见语法解惑</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-25T15:15:53+08:00">
-                2017-09-25
-              </time>
+              <a href="/2018/01/27/配置python-protobuf解析环境/" rel="next" title="配置python-protobuf解析环境">
+                <i class="fa fa-chevron-left"></i> 配置python-protobuf解析环境
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/09/25/IOS常见语法解惑/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/09/25/IOS常见语法解惑/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-          由于工作过程中经常需要查看IOS的Objective-C代码，遂把一些常见的、有疑问的OC语法列出，方便之后会看，提升效率。
-Objective-C中的@语法@interface告诉编译器，我要声明一个新类，包含了类的属性和方法，以@end结尾；
-@implementation告诉编译器，这是某个类
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/25/IOS常见语法解惑/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -676,149 +433,11 @@ Objective-C中的@语法@interface告诉编译器，我要声明一个新类，�
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xionghengheng.github.io/2017/09/24/开端/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Doer">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Doer">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/24/开端/" itemprop="url">开端</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-24T15:15:53+08:00">
-                2017-09-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/09/24/开端/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/09/24/开端/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          善于总结，勤于思考，每个月总结本月所得、所学。今天花了3个小时，搭建了一个基于hexo+github+markdown的blog平台，本意是希望和志同道合的技术好友一起学习，一起进步。
-起步参考blog搭建流程：http://www.jianshu.com/p/13e64c9e2295
-Next主题
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/24/开端/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -826,6 +445,20 @@ Next主题
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -846,8 +479,17 @@ Next主题
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -945,6 +587,22 @@ Next主题
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题定位"><span class="nav-number">1.</span> <span class="nav-text">问题定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题解决"><span class="nav-number">2.</span> <span class="nav-text">问题解决</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1098,6 +756,10 @@ Next主题
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -1115,6 +777,18 @@ Next主题
       <script id="dsq-count-scr" src="https://xionghengheng.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://xionghengheng.github.io/2018/09/16/一个有趣的死循环问题/';
+          this.page.identifier = '2018/09/16/一个有趣的死循环问题/';
+          this.page.title = '一个有趣的死循环问题';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xionghengheng.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   

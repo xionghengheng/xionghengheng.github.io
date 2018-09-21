@@ -3,6 +3,42 @@
   
     
     <entry>
+      <title><![CDATA[一个有趣的死循环问题]]></title>
+      <url>/2018/09/16/%E4%B8%80%E4%B8%AA%E6%9C%89%E8%B6%A3%E7%9A%84%E6%AD%BB%E5%BE%AA%E7%8E%AF%E9%97%AE%E9%A2%98/</url>
+      <content type="html"><![CDATA[<p>##问题引出</p>
+<p>最近在工作过程中，遇到一个很有意思的bug，问题出现概率很小，很难复现，但是特别严重，直接导致用户无法使用App，属于不可容忍的问题，因此必须解决。问题出现在Android-App跑压测的过程中，我们提供的第三方库会突然停止工作，但是App的UI还是能正常的运转，于是我以我的职业敏感性当即做出判断（害羞 &lt;逃），导致这个bug是因为我们提供的动态库中的消息线程被堵塞了，从而导致整个库无法工作。</p>
+<p>通常情况下，线程被堵塞住，有下面几个原因：</p>
+<ul>
+<li>执行耗时任务（如网络IO或者文件IO等，导致整个线程卡死）</li>
+<li>死锁（消息线程拿着A锁，等待B锁，数据处理线程拿着B锁，等待A锁，相互等待，导致卡死）</li>
+<li>死循环（程序卡在一个循环，CPU狂转，无法跳出）</li>
+</ul>
+<h2 id="问题定位"><a href="#问题定位" class="headerlink" title="问题定位"></a>问题定位</h2><p>首先第一个思路，就是在App出现卡主问题后，导出所有线程的调用堆栈，查看我们自己的库线程，看哪个线程哪个函数调用存在问题，取线程堆栈，通常有两个方法：</p>
+<ul>
+<li><p>在Android端，程序ANR后，系统会保留该进程的所有线程堆栈的traces文件。但是有个前提，只有主线程（UI线程）卡主的时候，系统才会生成这个文件，其他子线程或者库线程卡主是不会生成traces文件的。</p>
+</li>
+<li><p>出现问题后，让App强制crash，生成crash线程堆栈。我们尝试让UI线程强制crash后，却只生成了UI线程的调用栈，没有我们库线程的信息。</p>
+</li>
+</ul>
+<p>抓调用栈的思路否定之后，我们决定先进一步缩小问题范围，出现卡主问题后，我们对Android手机执行了如下命令，找出我们App所有线程的运行状况。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell top -m 20 -t</div></pre></td></tr></table></figure>
+<p>巧合地发现每次采样数据中，CPU使用率最高都是我们App进程中的同一个线程，正是我们动态库的消息线程，而该线程的使用率竟然比图像绘制线程占比还要高了几倍，很明显的异常，因此几乎可以断定是该线程导致的卡死问题，同时也可以排除死锁的可能性，因为死锁会让线程wait住，不会过多的占用CPU，同时由于我们的AppIO操作很少，也就排除了文件IO和网络IO，基本可以确认是死循环导致。</p>
+<p>那么这个线程到底是在哪个位置卡死呢？这时候最笨的方法，效果最明显，【二分加Log法】，加log的位置以代码行数进行二分切隔，如果第N行日志没有输出，那么肯定说明问题代码在第N-1~N行之间，于是乎最终定位到了这一段神奇的死循环代码问题。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">TransAngleTo360</span><span class="params">(<span class="keyword">double</span>&amp; dAngle)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">	<span class="keyword">while</span> (dAngle &lt; <span class="number">0</span>)</div><div class="line">	&#123;</div><div class="line">		dAngle += <span class="number">360</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">while</span> (dAngle &gt; <span class="number">360</span>)</div><div class="line">	&#123;</div><div class="line">		dAngle -= <span class="number">360</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这段代码，通过两个while循环将输入角度归化到0~360度之间，问题就出在这个输入值这里。通过复现的日志发现，代码走到了异常分支，对某个静态数组 double arrAngele[8]，执行了取下标-1的操作，arrAngele[-1]，产生了一个未定义的极大值，我们都知道8字节的double的取值范围是：</p>
+<blockquote>
+<p>负值取值范围为 -1.79769313486231570E+308 到 -4.94065645841246544E-324；<br>正值取值范围为 4.94065645841246544E-324 到 1.79769313486231570E+308。</p>
+</blockquote>
+<p>如果将1.79e+308这个数传给TransAngleTo360函数，那么函数需要执行5e+305次循环才能结束，假设我们的计算机每秒能执行10亿次机器指令，那执行完这个循环的时间，大约是1e+207秒。。。。</p>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>对于函数输入参数，进行超大或超小值的范围控制，很明显这个方法只是暂时的补丁，且是在你知道入参大小的前提下，做的限制，如果不确定入参范围，很可能会出问题。</p>
+<p>那么更好的做法其实是这样的，先看整数部分有多少个360，记为cnt，然后用原有角度减去cnt*360即可，为负数的时候对应处理下就行。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">TransAngleTo360</span><span class="params">(<span class="keyword">double</span>&amp; dAngle)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">int</span> cnt = dAngle/<span class="number">360</span>;</div><div class="line">    <span class="keyword">if</span> (time &gt;= <span class="number">0</span>)</div><div class="line">        dAngle = dAngle - cnt*<span class="number">360</span>;</div><div class="line">    <span class="keyword">else</span></div><div class="line">        dAngle = dAngle - (cnt - <span class="number">1</span>)*<span class="number">360</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[配置python-protobuf解析环境]]></title>
       <url>/2018/01/27/%E9%85%8D%E7%BD%AEpython-protobuf%E8%A7%A3%E6%9E%90%E7%8E%AF%E5%A2%83/</url>
       <content type="html"><![CDATA[<p>protobuf是一种跨语言协议，不同语言之间只需定义同一份proto文件，即可实现不同种类的语言的协议沟通。由于工作中使用c++解码较为麻烦，为了提升工作效率，想通过python达到快速解析pb数据的目的（系统为macOS Sierra）。</p>
@@ -42,7 +78,7 @@
     <entry>
       <title><![CDATA[IOS常见语法解惑]]></title>
       <url>/2017/09/25/IOS%E5%B8%B8%E8%A7%81%E8%AF%AD%E6%B3%95%E8%A7%A3%E6%83%91/</url>
-      <content type="html"><![CDATA[<p>由于工作工程中经常需要查看IOS的Objective-C代码，遂把一些常见的、有疑问的OC语法列出，方便之后会看，提升效率。</p>
+      <content type="html"><![CDATA[<p>由于工作过程中经常需要查看IOS的Objective-C代码，遂把一些常见的、有疑问的OC语法列出，方便之后会看，提升效率。</p>
 <h3 id="Objective-C中的-语法"><a href="#Objective-C中的-语法" class="headerlink" title="Objective-C中的@语法"></a>Objective-C中的@语法</h3><p>@interface告诉编译器，我要声明一个新类，包含了类的属性和方法，以@end结尾；</p>
 <p>@implementation告诉编译器，这是某个类的具体实现，以@end结尾；</p>
 <p>@property是声明属性的语法，它可以快速方便的为类的成员变量创建存取器，并允许我们通过点语法使用存取器，<strong>@property等同于在.h文件中声明实例变量的get/set方法，@synthesize等同于在.m文件中实现实例变量的get/set方法</strong>。需要注意的是@property可以直接给成员变量赋特性，如nonatomic表示非原子的，assign表示值类型。</p>
@@ -50,7 +86,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@interface BatteryInfo: NSObject</div><div class="line">&#123;</div><div class="line">NSInteger _batteryLevel;</div><div class="line">CGFloat   _current;</div><div class="line">&#125;</div><div class="line">- (void)showBatteryInfo;</div><div class="line">@property (nonatomic, assign) NSInteger batteryLevel;</div><div class="line">@property (nonatomic, assign) CGFloat current;</div><div class="line">@end</div></pre></td></tr></table></figure>
 <p>实现通常放在类的.m文件中，代码示例如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@implementation BatteryInfo</div><div class="line"></div><div class="line">- (void)showBatteryInfo</div><div class="line">&#123;</div><div class="line">//TODO</div><div class="line">&#125;</div><div class="line">@synthesize batteryLevel = _batteryLevel;</div><div class="line">@synthesize current = _current;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
-]]></content>
+<h3 id="Objective-C中的函数调用语法"><a href="#Objective-C中的函数调用语法" class="headerlink" title="Objective-C中的函数调用语法"></a>Objective-C中的函数调用语法</h3>]]></content>
       
         
     </entry>
@@ -79,14 +115,9 @@
   
     
     <entry>
-      <title><![CDATA[简介]]></title>
-      <url>/about/index.html</url>
-      <content type="html"><![CDATA[<h5 id="语言擅长"><a href="#语言擅长" class="headerlink" title="语言擅长"></a>语言擅长</h5><p>1.c++（熟练）</p>
-<p>2.python（日常脚本编写）</p>
-<p>3.java（做过javaEE后台开发）</p>
-<h5 id="技术领域"><a href="#技术领域" class="headerlink" title="技术领域"></a>技术领域</h5><p>移动c++引擎开发</p>
-<h5 id="感兴趣的源码阅读"><a href="#感兴趣的源码阅读" class="headerlink" title="感兴趣的源码阅读"></a>感兴趣的源码阅读</h5><p>1.redis（阅读中）  <a href="https://github.com/antirez/redis" target="_blank" rel="external">https://github.com/antirez/redis</a></p>
-]]></content>
+      <title><![CDATA[标签]]></title>
+      <url>/tags/index.html</url>
+      <content type="html"></content>
     </entry>
     
     <entry>
@@ -96,9 +127,14 @@
     </entry>
     
     <entry>
-      <title><![CDATA[标签]]></title>
-      <url>/tags/index.html</url>
-      <content type="html"></content>
+      <title><![CDATA[简介]]></title>
+      <url>/about/index.html</url>
+      <content type="html"><![CDATA[<h5 id="语言擅长"><a href="#语言擅长" class="headerlink" title="语言擅长"></a>语言擅长</h5><p>1.c++（熟练）</p>
+<p>2.python（日常脚本编写）</p>
+<p>3.java（做过javaEE后台开发）</p>
+<h5 id="技术领域"><a href="#技术领域" class="headerlink" title="技术领域"></a>技术领域</h5><p>移动c++引擎开发</p>
+<h5 id="感兴趣的源码阅读"><a href="#感兴趣的源码阅读" class="headerlink" title="感兴趣的源码阅读"></a>感兴趣的源码阅读</h5><p>1.redis（阅读中）  <a href="https://github.com/antirez/redis" target="_blank" rel="external">https://github.com/antirez/redis</a></p>
+]]></content>
     </entry>
     
   
