@@ -5,8 +5,7 @@
     <entry>
       <title><![CDATA[一个有趣的死循环问题]]></title>
       <url>/2018/09/16/%E4%B8%80%E4%B8%AA%E6%9C%89%E8%B6%A3%E7%9A%84%E6%AD%BB%E5%BE%AA%E7%8E%AF%E9%97%AE%E9%A2%98/</url>
-      <content type="html"><![CDATA[<p>##问题引出</p>
-<p>最近在工作过程中，遇到一个很有意思的bug，问题出现概率很小，很难复现，但是特别严重，直接导致用户无法使用App，属于不可容忍的问题，因此必须解决。问题出现在Android-App跑压测的过程中，我们提供的第三方库会突然停止工作，但是App的UI还是能正常的运转，于是我以我的职业敏感性当即做出判断（害羞 &lt;逃），导致这个bug是因为我们提供的动态库中的消息线程被堵塞了，从而导致整个库无法工作。</p>
+      <content type="html"><![CDATA[<h2 id="问题引出"><a href="#问题引出" class="headerlink" title="问题引出"></a>问题引出</h2><p>最近在工作过程中，遇到一个很有意思的bug，问题出现概率很小，很难复现，但是特别严重，直接导致用户无法使用App，属于不可容忍的问题，因此必须解决。问题出现在Android-App跑压测的过程中，我们提供的第三方库会突然停止工作，但是App的UI还是能正常的运转，于是我以我的职业敏感性当即做出判断（害羞 &lt;逃），导致这个bug是因为我们提供的动态库中的消息线程被堵塞了，从而导致整个库无法工作。</p>
 <p>通常情况下，线程被堵塞住，有下面几个原因：</p>
 <ul>
 <li>执行耗时任务（如网络IO或者文件IO等，导致整个线程卡死）</li>
@@ -115,9 +114,14 @@
   
     
     <entry>
-      <title><![CDATA[标签]]></title>
-      <url>/tags/index.html</url>
-      <content type="html"></content>
+      <title><![CDATA[简介]]></title>
+      <url>/about/index.html</url>
+      <content type="html"><![CDATA[<h5 id="语言擅长"><a href="#语言擅长" class="headerlink" title="语言擅长"></a>语言擅长</h5><p>1.c++（熟练）</p>
+<p>2.python（日常脚本编写）</p>
+<p>3.java（做过javaEE后台开发）</p>
+<h5 id="技术领域"><a href="#技术领域" class="headerlink" title="技术领域"></a>技术领域</h5><p>移动c++引擎开发</p>
+<h5 id="感兴趣的源码阅读"><a href="#感兴趣的源码阅读" class="headerlink" title="感兴趣的源码阅读"></a>感兴趣的源码阅读</h5><p>1.redis（阅读中）  <a href="https://github.com/antirez/redis" target="_blank" rel="external">https://github.com/antirez/redis</a></p>
+]]></content>
     </entry>
     
     <entry>
@@ -127,14 +131,9 @@
     </entry>
     
     <entry>
-      <title><![CDATA[简介]]></title>
-      <url>/about/index.html</url>
-      <content type="html"><![CDATA[<h5 id="语言擅长"><a href="#语言擅长" class="headerlink" title="语言擅长"></a>语言擅长</h5><p>1.c++（熟练）</p>
-<p>2.python（日常脚本编写）</p>
-<p>3.java（做过javaEE后台开发）</p>
-<h5 id="技术领域"><a href="#技术领域" class="headerlink" title="技术领域"></a>技术领域</h5><p>移动c++引擎开发</p>
-<h5 id="感兴趣的源码阅读"><a href="#感兴趣的源码阅读" class="headerlink" title="感兴趣的源码阅读"></a>感兴趣的源码阅读</h5><p>1.redis（阅读中）  <a href="https://github.com/antirez/redis" target="_blank" rel="external">https://github.com/antirez/redis</a></p>
-]]></content>
+      <title><![CDATA[标签]]></title>
+      <url>/tags/index.html</url>
+      <content type="html"></content>
     </entry>
     
   

@@ -81,17 +81,17 @@
 
 
 
-<meta name="description" content="##问题引出 最近在工作过程中，遇到一个很有意思的bug，问题出现概率很小，很难复现，但是特别严重，直接导致用户无法使用App，属于不可容忍的问题，因此必须解决。问题出现在Android-App跑压测的过程中，我们提供的第三方库会突然停止工作，但是App的UI还是能正常的运转，于是我以我的职业敏感性当即做出判断（害羞 &amp;lt;逃），导致这个bug是因为我们提供的动态库中的消息线程被堵塞了，从而导致">
+<meta name="description" content="问题引出最近在工作过程中，遇到一个很有意思的bug，问题出现概率很小，很难复现，但是特别严重，直接导致用户无法使用App，属于不可容忍的问题，因此必须解决。问题出现在Android-App跑压测的过程中，我们提供的第三方库会突然停止工作，但是App的UI还是能正常的运转，于是我以我的职业敏感性当即做出判断（害羞 &amp;lt;逃），导致这个bug是因为我们提供的动态库中的消息线程被堵塞了，从而导致整个库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一个有趣的死循环问题">
 <meta property="og:url" content="http://xionghengheng.github.io/2018/09/16/一个有趣的死循环问题/index.html">
 <meta property="og:site_name" content="Doer">
-<meta property="og:description" content="##问题引出 最近在工作过程中，遇到一个很有意思的bug，问题出现概率很小，很难复现，但是特别严重，直接导致用户无法使用App，属于不可容忍的问题，因此必须解决。问题出现在Android-App跑压测的过程中，我们提供的第三方库会突然停止工作，但是App的UI还是能正常的运转，于是我以我的职业敏感性当即做出判断（害羞 &amp;lt;逃），导致这个bug是因为我们提供的动态库中的消息线程被堵塞了，从而导致">
+<meta property="og:description" content="问题引出最近在工作过程中，遇到一个很有意思的bug，问题出现概率很小，很难复现，但是特别严重，直接导致用户无法使用App，属于不可容忍的问题，因此必须解决。问题出现在Android-App跑压测的过程中，我们提供的第三方库会突然停止工作，但是App的UI还是能正常的运转，于是我以我的职业敏感性当即做出判断（害羞 &amp;lt;逃），导致这个bug是因为我们提供的动态库中的消息线程被堵塞了，从而导致整个库">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-21T01:46:37.000Z">
+<meta property="og:updated_time" content="2018-09-21T01:49:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一个有趣的死循环问题">
-<meta name="twitter:description" content="##问题引出 最近在工作过程中，遇到一个很有意思的bug，问题出现概率很小，很难复现，但是特别严重，直接导致用户无法使用App，属于不可容忍的问题，因此必须解决。问题出现在Android-App跑压测的过程中，我们提供的第三方库会突然停止工作，但是App的UI还是能正常的运转，于是我以我的职业敏感性当即做出判断（害羞 &amp;lt;逃），导致这个bug是因为我们提供的动态库中的消息线程被堵塞了，从而导致">
+<meta name="twitter:description" content="问题引出最近在工作过程中，遇到一个很有意思的bug，问题出现概率很小，很难复现，但是特别严重，直接导致用户无法使用App，属于不可容忍的问题，因此必须解决。问题出现在Android-App跑压测的过程中，我们提供的第三方库会突然停止工作，但是App的UI还是能正常的运转，于是我以我的职业敏感性当即做出判断（害羞 &amp;lt;逃），导致这个bug是因为我们提供的动态库中的消息线程被堵塞了，从而导致整个库">
 
 
 
@@ -357,8 +357,7 @@
       
 
       
-        <p>##问题引出</p>
-<p>最近在工作过程中，遇到一个很有意思的bug，问题出现概率很小，很难复现，但是特别严重，直接导致用户无法使用App，属于不可容忍的问题，因此必须解决。问题出现在Android-App跑压测的过程中，我们提供的第三方库会突然停止工作，但是App的UI还是能正常的运转，于是我以我的职业敏感性当即做出判断（害羞 &lt;逃），导致这个bug是因为我们提供的动态库中的消息线程被堵塞了，从而导致整个库无法工作。</p>
+        <h2 id="问题引出"><a href="#问题引出" class="headerlink" title="问题引出"></a>问题引出</h2><p>最近在工作过程中，遇到一个很有意思的bug，问题出现概率很小，很难复现，但是特别严重，直接导致用户无法使用App，属于不可容忍的问题，因此必须解决。问题出现在Android-App跑压测的过程中，我们提供的第三方库会突然停止工作，但是App的UI还是能正常的运转，于是我以我的职业敏感性当即做出判断（害羞 &lt;逃），导致这个bug是因为我们提供的动态库中的消息线程被堵塞了，从而导致整个库无法工作。</p>
 <p>通常情况下，线程被堵塞住，有下面几个原因：</p>
 <ul>
 <li>执行耗时任务（如网络IO或者文件IO等，导致整个线程卡死）</li>
@@ -597,7 +596,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题定位"><span class="nav-number">1.</span> <span class="nav-text">问题定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题解决"><span class="nav-number">2.</span> <span class="nav-text">问题解决</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题引出"><span class="nav-number">1.</span> <span class="nav-text">问题引出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题定位"><span class="nav-number">2.</span> <span class="nav-text">问题定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题解决"><span class="nav-number">3.</span> <span class="nav-text">问题解决</span></a></li></ol></div>
             
 
           </div>
