@@ -23,7 +23,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell top -m 20 -t</div></pre></td></tr></table></figure>
 <p>巧合地发现每次采样数据中，CPU使用率最高都是我们App进程中的同一个线程，正是我们动态库的消息线程，而该线程的使用率竟然比图像绘制线程占比还要高了几倍，很明显的异常，因此几乎可以断定是该线程导致的卡死问题，同时也可以排除死锁的可能性，因为死锁会让线程wait住，不会过多的占用CPU，同时由于我们的AppIO操作很少，也就排除了文件IO和网络IO，基本可以确认是死循环导致。</p>
 <p>那么这个线程到底是在哪个位置卡死呢？这时候最笨的方法，效果最明显，【二分加Log法】，加log的位置以代码行数进行二分切隔，如果第N行日志没有输出，那么肯定说明问题代码在第N-1~N行之间，于是乎最终定位到了这一段神奇的死循环代码问题。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">TransAngleTo360</span><span class="params">(<span class="keyword">double</span>&amp; dAngle)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">	<span class="keyword">while</span> (dAngle &lt; <span class="number">0</span>)</div><div class="line">	&#123;</div><div class="line">		dAngle += <span class="number">360</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">while</span> (dAngle &gt; <span class="number">360</span>)</div><div class="line">	&#123;</div><div class="line">		dAngle -= <span class="number">360</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">TransAngleTo360</span><span class="params">(<span class="keyword">double</span>&amp; dAngle)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">	<span class="keyword">while</span> (dAngle &lt; <span class="number">0</span>)</div><div class="line">		dAngle += <span class="number">360</span>;</div><div class="line">    </div><div class="line">	<span class="keyword">while</span> (dAngle &gt; <span class="number">360</span>)</div><div class="line">		dAngle -= <span class="number">360</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这段代码，通过两个while循环将输入角度归化到0~360度之间，问题就出在这个输入值这里。通过复现的日志发现，代码走到了异常分支，对某个静态数组 double arrAngele[8]，执行了取下标-1的操作，arrAngele[-1]，产生了一个未定义的极大值，我们都知道8字节的double的取值范围是：</p>
 <blockquote>
 <p>负值取值范围为 -1.79769313486231570E+308 到 -4.94065645841246544E-324；<br>正值取值范围为 4.94065645841246544E-324 到 1.79769313486231570E+308。</p>
@@ -34,6 +34,12 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">TransAngleTo360</span><span class="params">(<span class="keyword">double</span>&amp; dAngle)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">int</span> cnt = dAngle/<span class="number">360</span>;</div><div class="line">    <span class="keyword">if</span> (time &gt;= <span class="number">0</span>)</div><div class="line">        dAngle = dAngle - cnt*<span class="number">360</span>;</div><div class="line">    <span class="keyword">else</span></div><div class="line">        dAngle = dAngle - (cnt - <span class="number">1</span>)*<span class="number">360</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 ]]></content>
       
+        
+        <tags>
+            
+            <tag> BUG修复记录 </tag>
+            
+        </tags>
         
     </entry>
     
