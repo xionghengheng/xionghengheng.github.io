@@ -3,8 +3,8 @@
   
     
     <entry>
-      <title><![CDATA[C++性能优化之一：右值引用]]></title>
-      <url>/2018/10/15/C++%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E4%B8%80%EF%BC%9A%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8/</url>
+      <title><![CDATA[C++性能优化之二：右值引用]]></title>
+      <url>/2018/10/15/C++%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E4%BA%8C%EF%BC%9A%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8/</url>
       <content type="html"><![CDATA[<h2 id="来龙去脉"><a href="#来龙去脉" class="headerlink" title="来龙去脉"></a>来龙去脉</h2><p>在我项目里，经常会出现这样一段代码：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> _C_S(x) String(x)</span></div><div class="line">String str = _C_S(<span class="string">"hello world"</span>);</div></pre></td></tr></table></figure>
 <p>这个代码的运行机制实际上是这样的：</p>
@@ -36,8 +36,8 @@
     </entry>
     
     <entry>
-      <title><![CDATA[C++性能优化之二：合理使用内存]]></title>
-      <url>/2018/09/24/C++%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E4%BA%8C%EF%BC%9A%E5%90%88%E7%90%86%E4%BD%BF%E7%94%A8%E5%86%85%E5%AD%98/</url>
+      <title><![CDATA[C++性能优化之一：合理使用内存]]></title>
+      <url>/2018/09/24/C++%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E4%B8%80%EF%BC%9A%E5%90%88%E7%90%86%E4%BD%BF%E7%94%A8%E5%86%85%E5%AD%98/</url>
       <content type="html"><![CDATA[<p>要想在编码过程中，写出高效的代码，是需要自己长期的总结和不断学习的。工作以来，我自己也总结了一些小技巧，可以让你的程序运行的更快、内存空间使用更合理，同时我还会不断地补充该blog，争取建立出一个属于自己的c++ effective系列。</p>
 <p>不多说，直接进入正题，以下都是我再编程过程中，总结出来c++高效编码规则，每个topic对应一个规则。</p>
 <h2 id="局部变量合理使用"><a href="#局部变量合理使用" class="headerlink" title="局部变量合理使用"></a>局部变量合理使用</h2><p>让我们先看一段代码：</p>
@@ -198,14 +198,14 @@
     </entry>
     
     <entry>
-      <title><![CDATA[分类]]></title>
-      <url>/categories/index.html</url>
+      <title><![CDATA[标签]]></title>
+      <url>/tags/index.html</url>
       <content type="html"></content>
     </entry>
     
     <entry>
-      <title><![CDATA[标签]]></title>
-      <url>/tags/index.html</url>
+      <title><![CDATA[分类]]></title>
+      <url>/categories/index.html</url>
       <content type="html"></content>
     </entry>
     
