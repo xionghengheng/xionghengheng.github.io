@@ -216,6 +216,12 @@
   
     
     <entry>
+      <title><![CDATA[标签]]></title>
+      <url>/tags/index.html</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[分类]]></title>
       <url>/categories/index.html</url>
       <content type="html"></content>
@@ -230,12 +236,6 @@
 <h5 id="技术领域"><a href="#技术领域" class="headerlink" title="技术领域"></a>技术领域</h5><p>移动c++引擎开发</p>
 <h5 id="感兴趣的源码阅读"><a href="#感兴趣的源码阅读" class="headerlink" title="感兴趣的源码阅读"></a>感兴趣的源码阅读</h5><p>1.redis（阅读中）  <a href="https://github.com/antirez/redis" target="_blank" rel="external">https://github.com/antirez/redis</a></p>
 ]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[标签]]></title>
-      <url>/tags/index.html</url>
-      <content type="html"></content>
     </entry>
     
   
