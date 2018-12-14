@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="环境配置," />
+  <meta name="keywords" content="C++," />
 
 
 
@@ -81,18 +81,21 @@
 
 
 
-<meta name="description" content="善于总结，勤于思考，每个月总结本月所得、所学。今天花了3个小时，搭建了一个基于hexo+github+markdown的blog平台，本意是希望和志同道合的技术好友一起学习，一起进步。 起步参考blog搭建流程：http://www.jianshu.com/p/13e64c9e2295 Next主题模板使用：http://theme-next.iissnan.com markdown基本语法：ht">
-<meta name="keywords" content="环境配置">
+<meta name="description" content="我理解的C++虚函数实现机制虚函数使用方法很简单，直接在函数名前面添加关键字virtual声明即可，如果虚函数末尾增加=0则表示为纯虚函数，纯虚函数要求所有派生类都必须重写该该函数，带有纯虚函数的类我们也称为虚基类。 虚函数的实现，作为一个老生常谈的问题，要想透彻的讲明白，还是需要对底层机制有进一步的理解的。 问题抛出基类指针为什么能调用子类的虚函数？ 虚函数实现的关键原理和虚函数表指针vptr有">
+<meta name="keywords" content="C++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开端">
-<meta property="og:url" content="http://xionghengheng.github.io/2017/09/24/开端/index.html">
+<meta property="og:title" content="我理解的C++虚函数实现机制">
+<meta property="og:url" content="http://xionghengheng.github.io/2018/12/15/我理解的C-虚函数实现机制/index.html">
 <meta property="og:site_name" content="Doer">
-<meta property="og:description" content="善于总结，勤于思考，每个月总结本月所得、所学。今天花了3个小时，搭建了一个基于hexo+github+markdown的blog平台，本意是希望和志同道合的技术好友一起学习，一起进步。 起步参考blog搭建流程：http://www.jianshu.com/p/13e64c9e2295 Next主题模板使用：http://theme-next.iissnan.com markdown基本语法：ht">
+<meta property="og:description" content="我理解的C++虚函数实现机制虚函数使用方法很简单，直接在函数名前面添加关键字virtual声明即可，如果虚函数末尾增加=0则表示为纯虚函数，纯虚函数要求所有派生类都必须重写该该函数，带有纯虚函数的类我们也称为虚基类。 虚函数的实现，作为一个老生常谈的问题，要想透彻的讲明白，还是需要对底层机制有进一步的理解的。 问题抛出基类指针为什么能调用子类的虚函数？ 虚函数实现的关键原理和虚函数表指针vptr有">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-15T11:38:22.000Z">
+<meta property="og:image" content="http://xionghengheng.github.io/Users/wuzengxiong/Library/Application%20Support/typora-user-images/image-20181214234806724.png">
+<meta property="og:image" content="http://xionghengheng.github.io/Users/wuzengxiong/Library/Application%20Support/typora-user-images/image-20181214233149727.png">
+<meta property="og:updated_time" content="2018-12-14T16:20:14.017Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="开端">
-<meta name="twitter:description" content="善于总结，勤于思考，每个月总结本月所得、所学。今天花了3个小时，搭建了一个基于hexo+github+markdown的blog平台，本意是希望和志同道合的技术好友一起学习，一起进步。 起步参考blog搭建流程：http://www.jianshu.com/p/13e64c9e2295 Next主题模板使用：http://theme-next.iissnan.com markdown基本语法：ht">
+<meta name="twitter:title" content="我理解的C++虚函数实现机制">
+<meta name="twitter:description" content="我理解的C++虚函数实现机制虚函数使用方法很简单，直接在函数名前面添加关键字virtual声明即可，如果虚函数末尾增加=0则表示为纯虚函数，纯虚函数要求所有派生类都必须重写该该函数，带有纯虚函数的类我们也称为虚基类。 虚函数的实现，作为一个老生常谈的问题，要想透彻的讲明白，还是需要对底层机制有进一步的理解的。 问题抛出基类指针为什么能调用子类的虚函数？ 虚函数实现的关键原理和虚函数表指针vptr有">
+<meta name="twitter:image" content="http://xionghengheng.github.io/Users/wuzengxiong/Library/Application%20Support/typora-user-images/image-20181214234806724.png">
 
 
 
@@ -122,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://xionghengheng.github.io/2017/09/24/开端/"/>
+  <link rel="canonical" href="http://xionghengheng.github.io/2018/12/15/我理解的C-虚函数实现机制/"/>
 
 
 
 
 
-  <title>开端 | Doer</title>
+  <title>我理解的C++虚函数实现机制 | Doer</title>
   
 
 
@@ -275,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xionghengheng.github.io/2017/09/24/开端/">
+    <link itemprop="mainEntityOfPage" href="http://xionghengheng.github.io/2018/12/15/我理解的C-虚函数实现机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Doer">
@@ -292,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">开端</h1>
+          <h1 class="post-title" itemprop="name headline">我理解的C++虚函数实现机制</h1>
         
 
         <div class="post-meta">
@@ -304,8 +307,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-24T15:15:53+08:00">
-                2017-09-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-15T00:19:45+08:00">
+                2018-12-15
               </time>
             
 
@@ -323,9 +326,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/09/24/开端/#comments" itemprop="discussionUrl">
+                <a href="/2018/12/15/我理解的C-虚函数实现机制/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/09/24/开端/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/12/15/我理解的C-虚函数实现机制/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -358,12 +361,24 @@
       
 
       
-        <p>善于总结，勤于思考，每个月总结本月所得、所学。今天花了3个小时，搭建了一个基于hexo+github+markdown的blog平台，本意是希望和志同道合的技术好友一起学习，一起进步。</p>
-<h3 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h3><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>blog搭建流程：<a href="http://www.jianshu.com/p/13e64c9e2295" target="_blank" rel="external">http://www.jianshu.com/p/13e64c9e2295</a></p>
-<p>Next主题模板使用：<a href="http://theme-next.iissnan.com" target="_blank" rel="external">http://theme-next.iissnan.com</a></p>
-<p>markdown基本语法：<a href="http://www.jianshu.com/p/1e402922ee32" target="_blank" rel="external">http://www.jianshu.com/p/1e402922ee32</a></p>
-<p>遇到的问题：<a href="https://github.com/hexojs/hexo/issues/961" target="_blank" rel="external">https://github.com/hexojs/hexo/issues/961</a></p>
-<p>部署好的文章无法及时更新到github page，原因是因为同步到旧文件造成，所以先清空public下的文件，然后再部署即可（hexo clean；hexo g;hexo deploy;）。ps ：目前依然存在该问题，不知道是不是github page服务存在问题。</p>
+        <h1 id="我理解的C-虚函数实现机制"><a href="#我理解的C-虚函数实现机制" class="headerlink" title="我理解的C++虚函数实现机制"></a>我理解的C++虚函数实现机制</h1><p>虚函数使用方法很简单，直接在函数名前面添加关键字virtual声明即可，如果虚函数末尾增加=0则表示为纯虚函数，纯虚函数要求所有派生类都必须重写该该函数，带有纯虚函数的类我们也称为虚基类。</p>
+<p>虚函数的实现，作为一个老生常谈的问题，要想透彻的讲明白，还是需要对底层机制有进一步的理解的。</p>
+<h2 id="问题抛出"><a href="#问题抛出" class="headerlink" title="问题抛出"></a>问题抛出</h2><p>基类指针为什么能调用子类的虚函数？</p>
+<p>虚函数实现的关键原理和虚函数表指针vptr有莫大关系，vptr实际上是指向一个虚函数表(一维数组)，该表存储了每个虚函数的函数地址，那么虚函数是如何借助这个vptr实现运行时对象的多态性，也就是我们常说的动态绑定。</p>
+<h2 id="从C-对象内存结构说起"><a href="#从C-对象内存结构说起" class="headerlink" title="从C++对象内存结构说起"></a>从C++对象内存结构说起</h2><p>阅读过《深度探索C++对象模型》的同学应该比较熟悉下面这个结构，每一个派生类对象实际上是由两个部分组成，如下面的图所示</p>
+<ul>
+<li>父类的部分，包括成员变量、vptr、成员函数等，都是共享给子类（当然有一定的权限设置）</li>
+<li>子类自身的部分，子类自己成员变量，成员函数</li>
+</ul>
+<p>所以子类就是个特殊的父类，享有父类所有属性，是is-a的关系。所以子类也就能直接强制转换为父类，我们通常使用dynamic_cast将子类指针转为父类指针，那么这个父类指针的访问域也就变为内存模型中的上半部分，无法再访问子类的任何资源，<strong>但是有个例外，那就是虚表指针vptr，为什么呢？</strong></p>
+<p><img src="/Users/wuzengxiong/Library/Application%20Support/typora-user-images/image-20181214234806724.png" alt="image-20181214234806724"></p>
+<p>我们来进一步看看vptr在类继承过程中到底是怎么变化？</p>
+<p>通常函数地址都是在编译的时候就确定了，但是虚函数的调用地址需要到运行的时候才能确定，因为你无法确定一个基类的指针到底是执行基类对象还是子类对象。</p>
+<p>实际上，虚函数表指针是在对象执行构造函数的确定的。对于基类来说，执行基类构造函数时，直接把虚函数表填充为基类的虚函数地址即可；对于派生类来说，派生类对象构造的时候，会先执行父类的构造函数（<strong>把虚函数表全部填充为基类的虚函数地址</strong>），然后再执行子类构造函数（<strong>对于子类重写的虚函数，修改虚函数表中对于的函数地址，将其改为子类的虚函数地址</strong>），具体过程如下图2个步骤所示：</p>
+<p><img src="/Users/wuzengxiong/Library/Application%20Support/typora-user-images/image-20181214233149727.png" alt="image-20181214233149727"></p>
+<h2 id="动态绑定"><a href="#动态绑定" class="headerlink" title="动态绑定"></a>动态绑定</h2><p>有了以上基础后，回到之前的问题，动态绑定是怎么发生的？</p>
+<p>现在回答这个问题很简单了，对于一个指向子类对象的基类指针，它的vptr其实在子类构造过程被改写过，所以使用基指针调用虚函数的时候，如果子类有重写，会调用子类的虚函数，如果没有重写，则直接调用基类的虚函数，这样就实现了运行时对象的多态性。</p>
+<h2 id="代码实例"><a href="#代码实例" class="headerlink" title="代码实例"></a>代码实例</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span></span></div><div class="line"><span class="class">&#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">()</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"animal sleep"</span>&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">breathe</span><span class="params">()</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"animal breathe"</span>&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">string</span> name;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fish</span>:</span><span class="keyword">public</span> Animal</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">breathe</span><span class="params">()</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"fish bubble"</span>&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> skin;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    Fish fh;</div><div class="line">    Fish *pFish = &amp;fh;</div><div class="line">    Animal* pAnimal = <span class="keyword">dynamic_cast</span>&lt;Animal*&gt;(pFish);</div><div class="line">    pAnimal-&gt;breathe();<span class="comment">//fish bubble 执行子类重写的虚函数</span></div><div class="line">    pAnimal-&gt;sleep();  <span class="comment">//animal sleep 执行基类的虚函数</span></div><div class="line">    pAnimal-&gt;name;     <span class="comment">//name位于基类域,能访问</span></div><div class="line"><span class="comment">//    pAnimal-&gt;skin; skin位于子类域,无法访问</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -381,7 +396,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/环境配置/" rel="tag"># 环境配置</a>
+            <a href="/tags/C/" rel="tag"># C++</a>
           
         </div>
       
@@ -394,15 +409,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/10/15/C++性能优化之二：右值引用/" rel="next" title="C++性能优化之二：右值引用">
+                <i class="fa fa-chevron-left"></i> C++性能优化之二：右值引用
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/25/IOS常见语法解惑/" rel="prev" title="IOS常见语法解惑">
-                IOS常见语法解惑 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -588,7 +603,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#起步"><span class="nav-number">1.</span> <span class="nav-text">起步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#我理解的C-虚函数实现机制"><span class="nav-number">1.</span> <span class="nav-text">我理解的C++虚函数实现机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题抛出"><span class="nav-number">1.1.</span> <span class="nav-text">问题抛出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从C-对象内存结构说起"><span class="nav-number">1.2.</span> <span class="nav-text">从C++对象内存结构说起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态绑定"><span class="nav-number">1.3.</span> <span class="nav-text">动态绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实例"><span class="nav-number">1.4.</span> <span class="nav-text">代码实例</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -771,9 +786,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://xionghengheng.github.io/2017/09/24/开端/';
-          this.page.identifier = '2017/09/24/开端/';
-          this.page.title = '开端';
+          this.page.url = 'http://xionghengheng.github.io/2018/12/15/我理解的C-虚函数实现机制/';
+          this.page.identifier = '2018/12/15/我理解的C-虚函数实现机制/';
+          this.page.title = '我理解的C++虚函数实现机制';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://xionghengheng.disqus.com/embed.js';
