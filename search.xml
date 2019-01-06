@@ -3,6 +3,46 @@
   
     
     <entry>
+      <title><![CDATA[一个有意思的栈溢出crash]]></title>
+      <url>/2019/01/06/%E4%B8%80%E4%B8%AA%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E6%A0%88%E6%BA%A2%E5%87%BAcrash/</url>
+      <content type="html"><![CDATA[<h2 id="问题引出"><a href="#问题引出" class="headerlink" title="问题引出"></a>问题引出</h2><p>最近在复习操作系统相关知识的时候，回忆起之前在某个版本遇到的Android离奇crash，记得当时这个crash在灰度期间造成的影响面不小，占到了整体crash率的10%，虽然crash堆栈能定位到是哪个位置，但是很多Android手机都难以复现，经过不懈努力，发现小米6能稳定复现这个crash，于是我们召集了小组同事到会议室集体应对这个问题，然而当时四、五个工程师对这个问题束手无策，也只能通过代码回滚的方式，去确认是哪一次提交导致的问题，不停的回滚代码，不停的打包，然而提交次数实在太多，导致一直没有定位到问题。</p>
+<p>最后我拿着这个手机带回家，我就不信必现的问题还跟不出来，跟到晚上2点左右，突然发现自己这个版本提交的某个代码会作用到这个crash堆栈，那个提交我只是在某个struct中增加了一个变量，这个变量的大小为1kb左右，于是我把这个变量注释掉，果然crash不再出现，于是我不停的调整这个变量的大小，发现调整到256字节以下就不会有问题，大于256字节有可能出现crash，当时我自己也是百思不得其解，不过毕竟crash解决了，我们能正常发版，也就把这个事给忘了。</p>
+<p>到最近，我突然发现这个crash可能和线程栈溢出有极大的关系。</p>
+<h2 id="问题定位"><a href="#问题定位" class="headerlink" title="问题定位"></a>问题定位</h2><p>结构体占据的内存变大，就导致crash，内存变小，就不会有问题。沿着这个线索，我发现在某个函数中，定义了一个该结构体的局部变量，而且这个调用栈的深度达到了18层，于是更加确信是该局部变量过大且沿途的调用栈过大，导致变量在压栈的过程中，栈溢出了。</p>
+<p>在linux上，可以很容易看到线程栈的默认大小，我的跳板机输出的线程栈大小为10MB</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ulimit -s <span class="comment">//10240=10MB</span></div></pre></td></tr></table></figure>
+<p>然而对于移动端，会稍有不同，因为移动端分为UI绘制主线程和子线程，主线程占的比重和资源自然要多些。我查阅了一番资料后，发现对于Android来说，不同的版本可能不一样，但是基本是主线程栈默认为8MB，子线程栈稍微小于1MB；对于IOS来说，这个默认值就更小了，IOS主线程栈默认为1MB，其他线程为512KB。</p>
+<p>而我们的So起的线程，并非主线程，因此通常只有1MB左右的栈空间，那么我们怎么验证crash那一次的函数调用栈真的是栈溢出导致的呢，其实很简单，只需要打印两个地址即可：</p>
+<ul>
+<li>线程执行的第一个函数，函数入参的压栈地址</li>
+<li>该线程执行的最深层函数，函数最后声明的局部变量的地址</li>
+</ul>
+<p>我使用这个方法，打印出两个地址分别为：0x000000016d09eee0和0x000000016cfac3bc，因为栈是向下增长的，用前一个地址减去后一个地址得到差值为994084字节，很显然已经接近1MB，然而我定位的可能还不是最深层的调用，因此这个调用栈，增大某个局部变量的大小，随时都有可能出现栈溢出的风险。</p>
+<h2 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h2><p>通过分析这个crash的调用栈发现，这18层调用栈中，前几层都出现了较大的局部变量拷贝的问题，达到50kb左右，导致随着调用层次的加深，局部变量和函数参数越来越多，占据的栈空间也越来越大，随时都可能存在栈溢出的风险。</p>
+<p>问题定之后，解决方法也比较简单：</p>
+<ul>
+<li>创建线程时，扩大线程栈的默认大小</li>
+<li>C++编程中，将过大的局部变量从栈空间转到堆空间</li>
+<li>函数参数传递过程中，对于占用较大内存的变量，避免值拷贝，使用引用或指针</li>
+<li>尽量使用循环代替递归</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_getstacksize</span><span class="params">(<span class="keyword">const</span> <span class="keyword">pthread_attr_t</span> *<span class="keyword">restrict</span> attr, <span class="keyword">size_t</span> *<span class="keyword">restrict</span> stacksize)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_setstacksize</span><span class="params">(<span class="keyword">pthread_attr_t</span> *attr, <span class="keyword">size_t</span> stacksize)</span></span>;</div></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>Android线程堆栈大小：<a href="https://zhuanlan.zhihu.com/p/33562383" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/33562383</a></p>
+<p>IOS线程堆栈大小：<a href="https://www.jianshu.com/p/51b9139442b5" target="_blank" rel="external">https://www.jianshu.com/p/51b9139442b5</a></p>
+<p>IOS栈溢出crash：<a href="http://initlife.com/blog/2015/10/28/iosli-de-zhan-xian-zhi-yin-fa-de-crash/" target="_blank" rel="external">http://initlife.com/blog/2015/10/28/iosli-de-zhan-xian-zhi-yin-fa-de-crash/</a></p>
+<p>线程栈大小设置和获取：<a href="http://pubs.opengroup.org/onlinepubs/009695299/functions/pthread_attr_getstacksize.html" target="_blank" rel="external">http://pubs.opengroup.org/onlinepubs/009695299/functions/pthread_attr_getstacksize.html</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> BUG修复记录 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[C++性能优化之三：内存泄露检测]]></title>
       <url>/2018/12/15/C-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E4%B8%89%EF%BC%9A%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E6%A3%80%E6%B5%8B/</url>
       <content type="html"></content>
@@ -230,6 +270,12 @@
   
     
     <entry>
+      <title><![CDATA[分类]]></title>
+      <url>/categories/index.html</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[标签]]></title>
       <url>/tags/index.html</url>
       <content type="html"></content>
@@ -244,12 +290,6 @@
 <h5 id="技术领域"><a href="#技术领域" class="headerlink" title="技术领域"></a>技术领域</h5><p>移动c++引擎开发</p>
 <h5 id="感兴趣的源码阅读"><a href="#感兴趣的源码阅读" class="headerlink" title="感兴趣的源码阅读"></a>感兴趣的源码阅读</h5><p>1.redis（阅读中）  <a href="https://github.com/antirez/redis" target="_blank" rel="external">https://github.com/antirez/redis</a></p>
 ]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[分类]]></title>
-      <url>/categories/index.html</url>
-      <content type="html"></content>
     </entry>
     
   

@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="问题引出最近在工作过程中，遇到一个很有意思的bug，问题出现概率很小，很难复现，但是特别严重，直接导致用户无法使用App，属于不可容忍的问题，因此必须解决。问题出现在Android-App跑压测的过程中，我们提供的第三方库会突然停止工作，但是App的UI还是能正常的运转，于是我以我的职业敏感性当即做出判断（害羞 &amp;lt;逃），导致这个bug是因为我们提供的动态库中的消息线程被堵塞了，从而导致整个库">
+<meta name="description" content="问题引出最近在复习操作系统相关知识的时候，回忆起之前在某个版本遇到的Android离奇crash，记得当时这个crash在灰度期间造成的影响面不小，占到了整体crash率的10%，虽然crash堆栈能定位到是哪个位置，但是很多Android手机都难以复现，经过不懈努力，发现小米6能稳定复现这个crash，于是我们召集了小组同事到会议室集体应对这个问题，然而当时四、五个工程师对这个问题束手无策，也只">
 <meta name="keywords" content="BUG修复记录">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一个有趣的死循环问题">
-<meta property="og:url" content="http://xionghengheng.github.io/2018/09/16/一个有趣的死循环问题/index.html">
+<meta property="og:title" content="一个有意思的栈溢出crash">
+<meta property="og:url" content="http://xionghengheng.github.io/2019/01/06/一个有意思的栈溢出crash/index.html">
 <meta property="og:site_name" content="Doer">
-<meta property="og:description" content="问题引出最近在工作过程中，遇到一个很有意思的bug，问题出现概率很小，很难复现，但是特别严重，直接导致用户无法使用App，属于不可容忍的问题，因此必须解决。问题出现在Android-App跑压测的过程中，我们提供的第三方库会突然停止工作，但是App的UI还是能正常的运转，于是我以我的职业敏感性当即做出判断（害羞 &amp;lt;逃），导致这个bug是因为我们提供的动态库中的消息线程被堵塞了，从而导致整个库">
+<meta property="og:description" content="问题引出最近在复习操作系统相关知识的时候，回忆起之前在某个版本遇到的Android离奇crash，记得当时这个crash在灰度期间造成的影响面不小，占到了整体crash率的10%，虽然crash堆栈能定位到是哪个位置，但是很多Android手机都难以复现，经过不懈努力，发现小米6能稳定复现这个crash，于是我们召集了小组同事到会议室集体应对这个问题，然而当时四、五个工程师对这个问题束手无策，也只">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-24T11:05:48.000Z">
+<meta property="og:updated_time" content="2019-01-06T07:09:00.340Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一个有趣的死循环问题">
-<meta name="twitter:description" content="问题引出最近在工作过程中，遇到一个很有意思的bug，问题出现概率很小，很难复现，但是特别严重，直接导致用户无法使用App，属于不可容忍的问题，因此必须解决。问题出现在Android-App跑压测的过程中，我们提供的第三方库会突然停止工作，但是App的UI还是能正常的运转，于是我以我的职业敏感性当即做出判断（害羞 &amp;lt;逃），导致这个bug是因为我们提供的动态库中的消息线程被堵塞了，从而导致整个库">
+<meta name="twitter:title" content="一个有意思的栈溢出crash">
+<meta name="twitter:description" content="问题引出最近在复习操作系统相关知识的时候，回忆起之前在某个版本遇到的Android离奇crash，记得当时这个crash在灰度期间造成的影响面不小，占到了整体crash率的10%，虽然crash堆栈能定位到是哪个位置，但是很多Android手机都难以复现，经过不懈努力，发现小米6能稳定复现这个crash，于是我们召集了小组同事到会议室集体应对这个问题，然而当时四、五个工程师对这个问题束手无策，也只">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://xionghengheng.github.io/2018/09/16/一个有趣的死循环问题/"/>
+  <link rel="canonical" href="http://xionghengheng.github.io/2019/01/06/一个有意思的栈溢出crash/"/>
 
 
 
 
 
-  <title>一个有趣的死循环问题 | Doer</title>
+  <title>一个有意思的栈溢出crash | Doer</title>
   
 
 
@@ -275,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xionghengheng.github.io/2018/09/16/一个有趣的死循环问题/">
+    <link itemprop="mainEntityOfPage" href="http://xionghengheng.github.io/2019/01/06/一个有意思的栈溢出crash/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Doer">
@@ -292,7 +292,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">一个有趣的死循环问题</h1>
+          <h1 class="post-title" itemprop="name headline">一个有意思的栈溢出crash</h1>
         
 
         <div class="post-meta">
@@ -304,8 +304,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T23:20:09+08:00">
-                2018-09-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-06T11:22:23+08:00">
+                2019-01-06
               </time>
             
 
@@ -323,9 +323,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/09/16/一个有趣的死循环问题/#comments" itemprop="discussionUrl">
+                <a href="/2019/01/06/一个有意思的栈溢出crash/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/09/16/一个有趣的死循环问题/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/01/06/一个有意思的栈溢出crash/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -358,33 +358,32 @@
       
 
       
-        <h2 id="问题引出"><a href="#问题引出" class="headerlink" title="问题引出"></a>问题引出</h2><p>最近在工作过程中，遇到一个很有意思的bug，问题出现概率很小，很难复现，但是特别严重，直接导致用户无法使用App，属于不可容忍的问题，因此必须解决。问题出现在Android-App跑压测的过程中，我们提供的第三方库会突然停止工作，但是App的UI还是能正常的运转，于是我以我的职业敏感性当即做出判断（害羞 &lt;逃），导致这个bug是因为我们提供的动态库中的消息线程被堵塞了，从而导致整个库无法工作。</p>
-<p>通常情况下，线程被堵塞住，有下面几个原因：</p>
+        <h2 id="问题引出"><a href="#问题引出" class="headerlink" title="问题引出"></a>问题引出</h2><p>最近在复习操作系统相关知识的时候，回忆起之前在某个版本遇到的Android离奇crash，记得当时这个crash在灰度期间造成的影响面不小，占到了整体crash率的10%，虽然crash堆栈能定位到是哪个位置，但是很多Android手机都难以复现，经过不懈努力，发现小米6能稳定复现这个crash，于是我们召集了小组同事到会议室集体应对这个问题，然而当时四、五个工程师对这个问题束手无策，也只能通过代码回滚的方式，去确认是哪一次提交导致的问题，不停的回滚代码，不停的打包，然而提交次数实在太多，导致一直没有定位到问题。</p>
+<p>最后我拿着这个手机带回家，我就不信必现的问题还跟不出来，跟到晚上2点左右，突然发现自己这个版本提交的某个代码会作用到这个crash堆栈，那个提交我只是在某个struct中增加了一个变量，这个变量的大小为1kb左右，于是我把这个变量注释掉，果然crash不再出现，于是我不停的调整这个变量的大小，发现调整到256字节以下就不会有问题，大于256字节有可能出现crash，当时我自己也是百思不得其解，不过毕竟crash解决了，我们能正常发版，也就把这个事给忘了。</p>
+<p>到最近，我突然发现这个crash可能和线程栈溢出有极大的关系。</p>
+<h2 id="问题定位"><a href="#问题定位" class="headerlink" title="问题定位"></a>问题定位</h2><p>结构体占据的内存变大，就导致crash，内存变小，就不会有问题。沿着这个线索，我发现在某个函数中，定义了一个该结构体的局部变量，而且这个调用栈的深度达到了18层，于是更加确信是该局部变量过大且沿途的调用栈过大，导致变量在压栈的过程中，栈溢出了。</p>
+<p>在linux上，可以很容易看到线程栈的默认大小，我的跳板机输出的线程栈大小为10MB</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ulimit -s <span class="comment">//10240=10MB</span></div></pre></td></tr></table></figure>
+<p>然而对于移动端，会稍有不同，因为移动端分为UI绘制主线程和子线程，主线程占的比重和资源自然要多些。我查阅了一番资料后，发现对于Android来说，不同的版本可能不一样，但是基本是主线程栈默认为8MB，子线程栈稍微小于1MB；对于IOS来说，这个默认值就更小了，IOS主线程栈默认为1MB，其他线程为512KB。</p>
+<p>而我们的So起的线程，并非主线程，因此通常只有1MB左右的栈空间，那么我们怎么验证crash那一次的函数调用栈真的是栈溢出导致的呢，其实很简单，只需要打印两个地址即可：</p>
 <ul>
-<li>执行耗时任务（如网络IO或者文件IO等，导致整个线程卡死）</li>
-<li>死锁（消息线程拿着A锁，等待B锁，数据处理线程拿着B锁，等待A锁，相互等待，导致卡死）</li>
-<li>死循环（程序卡在一个循环，CPU狂转，无法跳出）</li>
+<li>线程执行的第一个函数，函数入参的压栈地址</li>
+<li>该线程执行的最深层函数，函数最后声明的局部变量的地址</li>
 </ul>
-<h2 id="问题定位"><a href="#问题定位" class="headerlink" title="问题定位"></a>问题定位</h2><p>首先第一个思路，就是在App出现卡主问题后，导出所有线程的调用堆栈，查看我们自己的库线程，看哪个线程哪个函数调用存在问题，取线程堆栈，通常有两个方法：</p>
+<p>我使用这个方法，打印出两个地址分别为：0x000000016d09eee0和0x000000016cfac3bc，因为栈是向下增长的，用前一个地址减去后一个地址得到差值为994084字节，很显然已经接近1MB，然而我定位的可能还不是最深层的调用，因此这个调用栈，增大某个局部变量的大小，随时都有可能出现栈溢出的风险。</p>
+<h2 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h2><p>通过分析这个crash的调用栈发现，这18层调用栈中，前几层都出现了较大的局部变量拷贝的问题，达到50kb左右，导致随着调用层次的加深，局部变量和函数参数越来越多，占据的栈空间也越来越大，随时都可能存在栈溢出的风险。</p>
+<p>问题定之后，解决方法也比较简单：</p>
 <ul>
-<li><p>在Android端，程序ANR后，系统会保留该进程的所有线程堆栈的traces文件。但是有个前提，只有主线程（UI线程）卡主的时候，系统才会生成这个文件，其他子线程或者库线程卡主是不会生成traces文件的。</p>
-</li>
-<li><p>出现问题后，让App强制crash，生成crash线程堆栈。我们尝试让UI线程强制crash后，却只生成了UI线程的调用栈，没有我们库线程的信息。</p>
-</li>
+<li>创建线程时，扩大线程栈的默认大小</li>
+<li>C++编程中，将过大的局部变量从栈空间转到堆空间</li>
+<li>函数参数传递过程中，对于占用较大内存的变量，避免值拷贝，使用引用或指针</li>
+<li>尽量使用循环代替递归</li>
 </ul>
-<p>抓调用栈的思路否定之后，我们决定先进一步缩小问题范围，出现卡主问题后，我们对Android手机执行了如下命令，找出我们App所有线程的运行状况。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell top -m 20 -t</div></pre></td></tr></table></figure>
-<p>巧合地发现每次采样数据中，CPU使用率最高都是我们App进程中的同一个线程，正是我们动态库的消息线程，而该线程的使用率竟然比图像绘制线程占比还要高了几倍，很明显的异常，因此几乎可以断定是该线程导致的卡死问题，同时也可以排除死锁的可能性，因为死锁会让线程wait住，不会过多的占用CPU，同时由于我们的AppIO操作很少，也就排除了文件IO和网络IO，基本可以确认是死循环导致。</p>
-<p>那么这个线程到底是在哪个位置卡死呢？这时候最笨的方法，效果最明显，【二分加Log法】，加log的位置以代码行数进行二分切隔，如果第N行日志没有输出，那么肯定说明问题代码在第N-1~N行之间，于是乎最终定位到了这一段神奇的死循环代码问题。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">TransAngleTo360</span><span class="params">(<span class="keyword">double</span>&amp; dAngle)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">while</span> (dAngle &lt; <span class="number">0</span>)</div><div class="line">        dAngle += <span class="number">360</span>;</div><div class="line">    </div><div class="line">    <span class="keyword">while</span> (dAngle &gt; <span class="number">360</span>)</div><div class="line">        dAngle -= <span class="number">360</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这段代码，通过两个while循环将输入角度归化到0~360度之间，问题就出在这个输入值这里。通过复现的日志发现，代码走到了异常分支，对某个静态数组 double arrAngele[8]，执行了取下标-1的操作，arrAngele[-1]，产生了一个未定义的极大值，我们都知道8字节的double的取值范围是：</p>
-<blockquote>
-<p>负值取值范围为 -1.79769313486231570E+308 到 -4.94065645841246544E-324；<br>正值取值范围为 4.94065645841246544E-324 到 1.79769313486231570E+308。</p>
-</blockquote>
-<p>如果将1.79e+308这个数传给TransAngleTo360函数，那么函数需要执行5e+305次循环才能结束，假设我们的计算机每秒能执行10亿次机器指令，那执行完这个循环的时间，大约是1e+207秒。。。。</p>
-<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>对于函数输入参数，进行超大或超小值的范围控制，很明显这个方法只是暂时的补丁，且是在你知道入参大小的前提下，做的限制，如果不确定入参范围，很可能会出问题。</p>
-<p>那么更好的做法其实是这样的，先看整数部分有多少个360，记为cnt，然后用原有角度减去cnt*360即可，为负数的时候对应处理下就行。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">TransAngleTo360</span><span class="params">(<span class="keyword">double</span>&amp; dAngle)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">int</span> cnt = dAngle/<span class="number">360</span>;</div><div class="line">    <span class="keyword">if</span> (time &gt;= <span class="number">0</span>)</div><div class="line">        dAngle = dAngle - cnt*<span class="number">360</span>;</div><div class="line">    <span class="keyword">else</span></div><div class="line">        dAngle = dAngle - (cnt - <span class="number">1</span>)*<span class="number">360</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_getstacksize</span><span class="params">(<span class="keyword">const</span> <span class="keyword">pthread_attr_t</span> *<span class="keyword">restrict</span> attr, <span class="keyword">size_t</span> *<span class="keyword">restrict</span> stacksize)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_setstacksize</span><span class="params">(<span class="keyword">pthread_attr_t</span> *attr, <span class="keyword">size_t</span> stacksize)</span></span>;</div></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>Android线程堆栈大小：<a href="https://zhuanlan.zhihu.com/p/33562383" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/33562383</a></p>
+<p>IOS线程堆栈大小：<a href="https://www.jianshu.com/p/51b9139442b5" target="_blank" rel="external">https://www.jianshu.com/p/51b9139442b5</a></p>
+<p>IOS栈溢出crash：<a href="http://initlife.com/blog/2015/10/28/iosli-de-zhan-xian-zhi-yin-fa-de-crash/" target="_blank" rel="external">http://initlife.com/blog/2015/10/28/iosli-de-zhan-xian-zhi-yin-fa-de-crash/</a></p>
+<p>线程栈大小设置和获取：<a href="http://pubs.opengroup.org/onlinepubs/009695299/functions/pthread_attr_getstacksize.html" target="_blank" rel="external">http://pubs.opengroup.org/onlinepubs/009695299/functions/pthread_attr_getstacksize.html</a></p>
 
       
     </div>
@@ -415,8 +414,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/27/配置python-protobuf解析环境/" rel="next" title="配置python-protobuf解析环境">
-                <i class="fa fa-chevron-left"></i> 配置python-protobuf解析环境
+              <a href="/2018/12/15/C-性能优化之三：内存泄露检测/" rel="next" title="C++性能优化之三：内存泄露检测">
+                <i class="fa fa-chevron-left"></i> C++性能优化之三：内存泄露检测
               </a>
             
           </div>
@@ -424,10 +423,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/24/C++性能优化之一：合理使用内存/" rel="prev" title="C++性能优化之一：合理使用内存">
-                C++性能优化之一：合理使用内存 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -613,7 +608,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题引出"><span class="nav-number">1.</span> <span class="nav-text">问题引出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题定位"><span class="nav-number">2.</span> <span class="nav-text">问题定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题解决"><span class="nav-number">3.</span> <span class="nav-text">问题解决</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题引出"><span class="nav-number">1.</span> <span class="nav-text">问题引出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题定位"><span class="nav-number">2.</span> <span class="nav-text">问题定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题总结"><span class="nav-number">3.</span> <span class="nav-text">问题总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -796,9 +791,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://xionghengheng.github.io/2018/09/16/一个有趣的死循环问题/';
-          this.page.identifier = '2018/09/16/一个有趣的死循环问题/';
-          this.page.title = '一个有趣的死循环问题';
+          this.page.url = 'http://xionghengheng.github.io/2019/01/06/一个有意思的栈溢出crash/';
+          this.page.identifier = '2019/01/06/一个有意思的栈溢出crash/';
+          this.page.title = '一个有意思的栈溢出crash';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://xionghengheng.disqus.com/embed.js';
