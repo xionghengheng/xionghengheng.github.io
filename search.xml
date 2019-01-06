@@ -30,7 +30,8 @@
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>Android线程堆栈大小：<a href="https://zhuanlan.zhihu.com/p/33562383" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/33562383</a></p>
 <p>IOS线程堆栈大小：<a href="https://www.jianshu.com/p/51b9139442b5" target="_blank" rel="external">https://www.jianshu.com/p/51b9139442b5</a></p>
 <p>IOS栈溢出crash：<a href="http://initlife.com/blog/2015/10/28/iosli-de-zhan-xian-zhi-yin-fa-de-crash/" target="_blank" rel="external">http://initlife.com/blog/2015/10/28/iosli-de-zhan-xian-zhi-yin-fa-de-crash/</a></p>
-<p>线程栈大小设置和获取：<a href="http://pubs.opengroup.org/onlinepubs/009695299/functions/pthread_attr_getstacksize.html" target="_blank" rel="external">http://pubs.opengroup.org/onlinepubs/009695299/functions/pthread_attr_getstacksize.html</a></p>
+<p>线程栈大小设置和获取：</p>
+<p><a href="http://pubs.opengroup.org/onlinepubs/009695299/functions/pthread_attr_getstacksize.html" target="_blank" rel="external">http://pubs.opengroup.org/onlinepubs/009695299/functions/pthread_attr_getstacksize.html</a></p>
 ]]></content>
       
         
@@ -276,12 +277,6 @@
     </entry>
     
     <entry>
-      <title><![CDATA[标签]]></title>
-      <url>/tags/index.html</url>
-      <content type="html"></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[简介]]></title>
       <url>/about/index.html</url>
       <content type="html"><![CDATA[<h5 id="语言擅长"><a href="#语言擅长" class="headerlink" title="语言擅长"></a>语言擅长</h5><p>1.c++（熟练）</p>
@@ -290,6 +285,12 @@
 <h5 id="技术领域"><a href="#技术领域" class="headerlink" title="技术领域"></a>技术领域</h5><p>移动c++引擎开发</p>
 <h5 id="感兴趣的源码阅读"><a href="#感兴趣的源码阅读" class="headerlink" title="感兴趣的源码阅读"></a>感兴趣的源码阅读</h5><p>1.redis（阅读中）  <a href="https://github.com/antirez/redis" target="_blank" rel="external">https://github.com/antirez/redis</a></p>
 ]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[标签]]></title>
+      <url>/tags/index.html</url>
+      <content type="html"></content>
     </entry>
     
   
